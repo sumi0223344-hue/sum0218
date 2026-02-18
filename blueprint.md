@@ -27,34 +27,26 @@ This project is to create a sophisticated, modern, and visually appealing single
 *   **Layout:** Enhanced the grid layout to be more album-like.
 *   **Deployment:** Deployed changes via Git.
 
+### Version 3: Admin, AdSense, & Mobile UX
+
+*   **Admin Page:** Created a secure admin area (`/admin.html`, `/admin-dashboard.html`) with Firebase for login and dynamic item management (Create, Read, Delete).
+*   **Dynamic Gallery:** The main gallery now fetches and displays stone data directly from the Firestore database.
+*   **AdSense Prep:** Added a `privacy.html` page and linked it in the footer.
+*   **Mobile UX:** Implemented responsive design using media queries for better mobile viewing.
+
 ---
 
-## 4. Current Request: Admin, AdSense, & Mobile UX
+## 4. Current Request: Static Fallback for Gallery
 
-*   **Goal:** Implement a secure admin page for managing sale items, prepare the site for Google AdSense approval, improve mobile responsiveness, and update footer details.
+*   **Goal:** Ensure the website's gallery is visually functional even without a database connection by providing static fallback data.
 
 ### Action Plan
 
-1.  **Footer & AdSense Prep:**
-    *   Update the footer in `index.html` with the new copyright year and address.
-    *   Create a comprehensive `privacy.html` page, which is crucial for AdSense. This page will include sections on data collection, cookies, and AdSense itself.
-    *   Add a link to the new `privacy.html` in the footer of all user-facing pages.
+1.  **Modify `main.js`:**
+    *   Create a function `loadStaticStones()` that populates the gallery with a predefined set of sample suseok data.
+    *   Update the existing data fetching logic. If the Firebase connection fails or is not configured, call `loadStaticStones()` to display the sample data instead of an error message.
+    *   This ensures the gallery is never empty, improving the user experience for first-time visitors or in development environments.
 
-2.  **Mobile Responsiveness:**
-    *   In `style.css`, add `@media` queries to ensure the layout, typography, and navigation are optimized for mobile and tablet screen sizes.
-    *   Ensure the `sale-grid` and `philosophy-grid` adapt to a single-column layout on smaller screens.
-
-3.  **Admin Page Setup (with Firebase):**
-    *   Create a secure admin area composed of a login page (`admin.html`) and a dashboard (`admin-dashboard.html`).
-    *   Set up Firebase in the project by creating `.idx/mcp.json` and a Firebase config file.
-    *   Implement Firebase Authentication for the admin login.
-    *   Create a form in the admin dashboard to upload new stone images to Firebase Storage and save their details (title, size, origin) to a Firestore database.
-
-4.  **Dynamic Gallery Integration:**
-    *   Modify `main.js` to fetch stone data dynamically from the Firestore database instead of using hardcoded HTML in `index.html`.
-    *   The `stone-card` components will be generated based on the data retrieved from the database.
-
-5.  **Deployment:**
-    *   Stage all new and modified files using `git add .`.
-    *   Commit the changes with a descriptive message.
-    *   Push the final, error-free version to the `main` branch.
+2.  **Deployment:**
+    *   Stage and commit the changes.
+    *   Push the updated version to the `main` branch.

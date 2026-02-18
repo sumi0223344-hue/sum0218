@@ -53,12 +53,45 @@ class StoneCard extends HTMLElement {
 }
 customElements.define('stone-card', StoneCard);
 
+// --- Static Fallback Data ---
+const staticStones = [
+    {
+        title: "청송 꽃돌",
+        size: "25x40x15",
+        origin: "경북 청송",
+        imageUrl: "https://images.unsplash.com/photo-1525994886778-389b3546b448?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        title: "남한강 호피석",
+        size: "30x20x18",
+        origin: "남한강",
+        imageUrl: "https://images.unsplash.com/photo-1598156102269-e38023246747?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        title: "해석",
+        size: "15x15x20",
+        origin: "동해",
+        imageUrl: "https://images.unsplash.com/photo-1550186066-7e4368b13682?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }
+];
 
-// --- Dynamic Loading from Firestore ---
+function loadStaticStones() {
+    const saleGrid = document.querySelector('.sale-grid');
+    saleGrid.innerHTML = ''; // Clear existing content
+    staticStones.forEach(stone => {
+        const card = document.createElement('stone-card');
+        card.setAttribute('title', stone.title);
+        card.setAttribute('size', stone.size);
+        card.setAttribute('origin', stone.origin);
+        card.setAttribute('imageUrl', stone.imageUrl);
+        saleGrid.appendChild(card);
+    });
+}
+
+// --- Dynamic Loading Logic ---
 document.addEventListener('DOMContentLoaded', () => {
-  // Check if Firebase is available
-  if (typeof firebase !== 'undefined') {
-    // Initialize Firebase if not already done (for main page)
+  if (typeof firebase !== 'undefined' && firebaseConfig.apiKey !== "YOUR_API_KEY") {
+    // Initialize Firebase if not already done
     if (!firebase.apps.length) {
         firebase.initializeApp(firebaseConfig);
     }
@@ -68,9 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
     db.collection('stones').orderBy('createdAt', 'desc').get()
       .then(querySnapshot => {
         if (querySnapshot.empty) {
-          saleGrid.innerHTML = '<p>현재 등록된 수석이 없습니다.</p>';
+          // If DB is empty, show static data as a placeholder
+          loadStaticStones(); 
           return;
         }
+        saleGrid.innerHTML = ''; // Clear before populating
         querySnapshot.forEach(doc => {
           const stone = doc.data();
           const card = document.createElement('stone-card');
@@ -82,12 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       })
       .catch(error => {
-        console.error("Error fetching stones: ", error);
-        saleGrid.innerHTML = '<p>수석 정보를 불러오는 데 실패했습니다.</p>';
+        console.error("Error fetching stones from Firestore: ", error);
+        // If there's an error fetching, load static data
+        loadStaticStones();
       });
   } else {
-    console.warn("Firebase not configured. Admin features will not be available and stone list will be empty.");
-    const saleGrid = document.querySelector('.sale-grid');
-    saleGrid.innerHTML = '<p>데이터베이스에 연결할 수 없습니다.</p>';
+    // If Firebase is not configured, load static data
+    console.warn("Firebase not configured. Loading static data.");
+    loadStaticStones();
   }
 });
