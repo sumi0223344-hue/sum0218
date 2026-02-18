@@ -16,6 +16,11 @@ let enemies = [];
 let projectiles = [];
 let powerUps = [];
 let stars = [];
+const bonusImage = new Image();
+bonusImage.src = 'https://cdn.midjourney.com/bfe7754c-421e-4a42-a9d3-563b7682c38f/0_3.png';
+let bonusImageEndTime = 0;
+let bonusImageShown = false;
+
 
 const keys = { Space: false };
 let isMouseDown = false;
@@ -106,19 +111,16 @@ class Player {
         this.baseShootCooldown = 15;
         this.rapidFireTimer = 0;
         this.shieldTimer = 0;
+        this.image = new Image();
+        this.image.src = 'https://cdn.midjourney.com/baf0093f-6c6c-4b5b-b154-551133d3f6a4/0_3.png';
     }
 
     draw() {
-        // Draw ship
-        ctx.fillStyle = this.color;
-        ctx.shadowColor = this.color;
-        ctx.shadowBlur = 20;
-        ctx.beginPath();
-        ctx.moveTo(this.x + this.width / 2, this.y);
-        ctx.lineTo(this.x, this.y + this.height);
-        ctx.lineTo(this.x + this.width, this.y + this.height);
-        ctx.closePath();
-        ctx.fill();
+        // Draw ship image from spritesheet
+        if (this.image.complete) {
+            //                          sx, sy, sWidth,sHeight, dx,  dy,  dWidth, dHeight
+            ctx.drawImage(this.image, 0, 0, 512, 512, this.x, this.y, this.width, this.height);
+        }
 
         // Draw shield
         if (this.shieldTimer > 0) {
@@ -212,6 +214,8 @@ function startGame() {
     score = 0;
     scoreElement.textContent = score;
     createStars();
+    bonusImageShown = false;
+    bonusImageEndTime = 0;
     gameInterval = setInterval(updateGame, 1000 / 60);
 }
 
@@ -283,6 +287,22 @@ function updateGame() {
             }
         }
     });
+
+    if (score > 2000 && !bonusImageShown) {
+        bonusImageEndTime = Date.now() + 1000;
+        bonusImageShown = true;
+    }
+
+    if (Date.now() < bonusImageEndTime) {
+        if (bonusImage.complete) {
+            ctx.save();
+            ctx.globalAlpha = 0.5;
+            const imageX = (canvas.width - bonusImage.width) / 2;
+            const imageY = (canvas.height - bonusImage.height) / 2;
+            ctx.drawImage(bonusImage, imageX, imageY);
+            ctx.restore();
+        }
+    }
 }
 
 // Event Listeners

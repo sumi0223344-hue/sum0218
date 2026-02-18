@@ -16,6 +16,7 @@ A simple and fun retro-style airplane shooting game with a modern sci-fi aesthet
 *   **Scoring:** The score increases by 100 points for each enemy destroyed.
 *   **Game Over:** The game ends when the player collides with an enemy without a shield.
 *   **Sound Effects and Music:** The game includes placeholders for background music and sound effects.
+*   **Bonus Image on High Score:** When the player's score exceeds 2000, a special image is displayed in the center of the screen for one second with 50% opacity to celebrate the achievement.
 
 ## Style and Design
 
