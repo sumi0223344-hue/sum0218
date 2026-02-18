@@ -1,32 +1,45 @@
-# Blueprint: 섬마을 수석원
 
-## Overview
+# Blueprint: 섬마을 수석원 (Seommaeul Suseokwon) Website
 
-This document outlines the design and development of the "섬마을 수석원" website. The primary goal is to create a high-quality, multi-page website with rich, original content and a simple content management system (CMS) for the gallery.
+## 1. Project Overview
 
-## Current State
+This project is to create a sophisticated, modern, and visually appealing single-page website for "섬마을 수석원". The goal is to create an online presence that reflects the elegance, tranquility, and artistic value of *suseok* (viewing stones). The site will be a single, immersive page that guides the user through the story and collection of the gallery.
 
-A high-quality, multi-page static website has been built. The pages include Home, About, Gallery, Contact, and Privacy Policy. The content is currently hard-coded in the HTML files.
+## 2. Design & Style Philosophy
 
-## Plan for Admin Feature & Dynamic Gallery
+*   **Aesthetic:** Minimalist, elegant, and premium. The design will prioritize clean space, high-quality visuals, and a tranquil user experience.
+*   **Color Palette:** A nature-inspired palette using modern `oklch` color spaces for vibrancy and subtlety.
+*   **Typography:** Classic Serif for headings, clean Sans-serif for body text.
+*   **Visuals & Effects:** Full-screen hero, multi-layered drop shadows, and subtle interactive animations.
+*   **Layout:** A responsive, single-page layout using modern CSS (Flexbox, Grid).
 
-1.  **Integrate Firebase:** The project will be integrated with Google Firebase to provide backend services.
-    *   **Firestore Database:** To store gallery item metadata (name, description, size, origin, image URL).
-    *   **Firebase Storage:** To host the gallery image files.
-    *   **Firebase Authentication:** To secure the admin page.
+## 3. Features & Implemented Plan
 
-2.  **Create Admin Portal (`admin.html` & `admin.js`):**
-    *   A new `admin.html` page will be created, accessible only to the administrator.
-    *   It will be protected by a login mechanism using Firebase Authentication.
-    *   The page will contain a form to upload a new stone's image, name, description, size, and origin.
-    *   A new `admin.js` file will handle the logic for authentication and uploading data to Firebase Storage and Firestore.
+### Version 1: Initial Build
 
-3.  **Dynamically Load Gallery (`gallery.html` & `gallery.js`):
-    *   The static items in `gallery.html` will be removed.
-    *   A new `gallery.js` script will be created to fetch all gallery items from the Firestore database when the page loads.
-    *   The script will dynamically generate the HTML for each gallery item and display them on the page.
+*   **Structure:** Set up a single-page application with `index.html`, `style.css`, and `main.js`.
+*   **Sections:** Created Header, Hero, Introduction (`#intro`), Gallery (`#gallery`), Philosophy (`#philosophy`), and Footer sections.
+*   **Components:** Implemented a `<stone-card>` Web Component to display individual stones with their image, title, description, size, and origin.
+*   **Styling:** Applied a modern stylesheet using CSS Layers, custom properties, and a responsive grid layout for the gallery.
 
-4.  **Firebase Configuration:**
-    *   Add Firebase SDK scripts to all relevant HTML files.
-    *   Create a `firebase-config.js` file to hold the Firebase project configuration, which the user will need to provide.
-    *   Initialize Firebase services (Firestore, Storage, Auth) in the project.
+---
+
+## 4. Current Request: Gallery Update & Deployment
+
+*   **Goal:** Change the "Gallery" section to a "Suseok Sale" section with a more album-like feel, and then deploy the site via Git.
+
+### Action Plan
+
+1.  **Rename Section:**
+    *   In `index.html`, change the navigation link from "갤러리" to "수석판매".
+    *   Update the corresponding section `id` from `gallery` to `sale`.
+    *   Change the section heading `<h2>` from "대표 수석" to "수석 판매".
+
+2.  **Enhance Album Layout:**
+    *   In `style.css`, update the selectors from `#gallery` and `.gallery-grid` to `#sale` and `.sale-grid` respectively.
+    *   Modify the grid layout for `.sale-grid` to present the stone cards in a more prominent, album-style format. The cards will be made slightly larger and more focused.
+
+3.  **Deploy via Git:**
+    *   Stage all changes using `git add .`.
+    *   Commit the changes with a descriptive message.
+    *   Push the commit to the `main` branch on the remote repository.
