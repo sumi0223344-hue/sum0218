@@ -19,27 +19,42 @@ This project is to create a sophisticated, modern, and visually appealing single
 
 *   **Structure:** Set up a single-page application with `index.html`, `style.css`, and `main.js`.
 *   **Sections:** Created Header, Hero, Introduction (`#intro`), Gallery (`#gallery`), Philosophy (`#philosophy`), and Footer sections.
-*   **Components:** Implemented a `<stone-card>` Web Component to display individual stones with their image, title, description, size, and origin.
-*   **Styling:** Applied a modern stylesheet using CSS Layers, custom properties, and a responsive grid layout for the gallery.
+*   **Components:** Implemented a `<stone-card>` Web Component to display individual stones.
+
+### Version 2: Gallery Update
+
+*   **Rename:** Changed "Gallery" to "Suseok Sale" (`#sale`).
+*   **Layout:** Enhanced the grid layout to be more album-like.
+*   **Deployment:** Deployed changes via Git.
 
 ---
 
-## 4. Current Request: Gallery Update & Deployment
+## 4. Current Request: Admin, AdSense, & Mobile UX
 
-*   **Goal:** Change the "Gallery" section to a "Suseok Sale" section with a more album-like feel, and then deploy the site via Git.
+*   **Goal:** Implement a secure admin page for managing sale items, prepare the site for Google AdSense approval, improve mobile responsiveness, and update footer details.
 
 ### Action Plan
 
-1.  **Rename Section:**
-    *   In `index.html`, change the navigation link from "갤러리" to "수석판매".
-    *   Update the corresponding section `id` from `gallery` to `sale`.
-    *   Change the section heading `<h2>` from "대표 수석" to "수석 판매".
+1.  **Footer & AdSense Prep:**
+    *   Update the footer in `index.html` with the new copyright year and address.
+    *   Create a comprehensive `privacy.html` page, which is crucial for AdSense. This page will include sections on data collection, cookies, and AdSense itself.
+    *   Add a link to the new `privacy.html` in the footer of all user-facing pages.
 
-2.  **Enhance Album Layout:**
-    *   In `style.css`, update the selectors from `#gallery` and `.gallery-grid` to `#sale` and `.sale-grid` respectively.
-    *   Modify the grid layout for `.sale-grid` to present the stone cards in a more prominent, album-style format. The cards will be made slightly larger and more focused.
+2.  **Mobile Responsiveness:**
+    *   In `style.css`, add `@media` queries to ensure the layout, typography, and navigation are optimized for mobile and tablet screen sizes.
+    *   Ensure the `sale-grid` and `philosophy-grid` adapt to a single-column layout on smaller screens.
 
-3.  **Deploy via Git:**
-    *   Stage all changes using `git add .`.
+3.  **Admin Page Setup (with Firebase):**
+    *   Create a secure admin area composed of a login page (`admin.html`) and a dashboard (`admin-dashboard.html`).
+    *   Set up Firebase in the project by creating `.idx/mcp.json` and a Firebase config file.
+    *   Implement Firebase Authentication for the admin login.
+    *   Create a form in the admin dashboard to upload new stone images to Firebase Storage and save their details (title, size, origin) to a Firestore database.
+
+4.  **Dynamic Gallery Integration:**
+    *   Modify `main.js` to fetch stone data dynamically from the Firestore database instead of using hardcoded HTML in `index.html`.
+    *   The `stone-card` components will be generated based on the data retrieved from the database.
+
+5.  **Deployment:**
+    *   Stage all new and modified files using `git add .`.
     *   Commit the changes with a descriptive message.
-    *   Push the commit to the `main` branch on the remote repository.
+    *   Push the final, error-free version to the `main` branch.
