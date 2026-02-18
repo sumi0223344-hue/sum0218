@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오시는 길 & 문의 - 섬마을 수석원</title>
+    <meta name="description" content="섬마을 수석원의 위치, 운영 시간, 연락처 정보를 안내합니다. 문의사항이 있으시면 언제든지 연락주세요.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="index.html">섬마을 수석원</a></h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">홈</a></li>
+                <li><a href="about.html">수석원 소개</a></li>
+                <li><a href="gallery.html">온라인 갤러리</a></li>
+                <li><a href="contact.html" class="active">오시는 길 & 문의</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="contact-info">
+            <h2>방문 안내</h2>
+            <div class="contact-details">
+                <div class="info-block">
+                    <h3>주소</h3>
+                    <p>OO시 OO구 섬마을로 123번길 45</p>
+                </div>
+                <div class="info-block">
+                    <h3>운영 시간</h3>
+                    <p>매일 오전 10:00 - 오후 6:00</p>
+                    <p>(매주 월요일은 휴관입니다.)</p>
+                </div>
+                <div class="info-block">
+                    <h3>연락처</h3>
+                    <p>전화: 010-1234-5678</p>
+                    <p>이메일: contact@island-suseok.com</p>
+                </div>
+            </div>
+            <!-- 지도 API가 있다면 여기에 추가할 수 있습니다. -->
+            <div id="map-placeholder">
+                 <p style="text-align:center; padding: 50px 0; background-color: #eee;">지도 위치 (예시)</p>
+                 <!-- 실제 지도 구현 예시: <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe> -->
+            </div>
+        </section>
+
+        <section id="contact-form">
+            <h2>온라인 문의</h2>
+            <p>수석 구매, 전시에 관한 궁금한 점이나 기타 문의사항이 있으시면 아래 양식을 통해 보내주세요.</p>
+            <form>
+                <div class="form-group">
+                    <label for="name">이름:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                 <div class="form-group">
+                    <label for="subject">제목:</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">메시지:</label>
+                    <textarea id="message" name="message" rows="6" required></textarea>
+                </div>
+                <button type="submit">메시지 보내기</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 섬마을 수석원. All rights reserved.</p>
+            <p><a href="privacy.html">개인정보처리방침</a></p>
+        </div>
+    </footer>
+</body>
+</html>
