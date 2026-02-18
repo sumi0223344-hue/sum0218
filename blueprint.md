@@ -20,8 +20,9 @@ A simple and fun retro-style airplane shooting game.
 
 ## Style and Design
 
+*   **Start Screen:** Before the game starts, a cute pixel-art character is displayed on the main screen. This character disappears when the "Start Game" button is pressed.
+*   **Pixel-Art Airplanes:** The player and enemy ships are rendered with a more detailed pixel-art (dots) design, replacing the previous simple triangle shapes. The player's ship is a vibrant cyan, while the enemy ships have a grayscale, menacing look.
 *   **Retro Aesthetics:** The game features a retro design with pixelated graphics and a classic color palette.
-*   **Airplane Graphics:** The player's ship and enemy ships are rendered as simple, geometric airplane shapes (triangles). The player's ship is a vibrant cyan, while enemy ships are grayscale to distinguish them.
 *   **UI:** A simple and intuitive user interface displays the score and a "Start Game" button.
 
 ## Future Plans

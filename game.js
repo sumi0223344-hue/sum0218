@@ -2,12 +2,13 @@ const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 const scoreElement = document.getElementById('score');
 const startButton = document.getElementById('start-button');
+const startScreen = document.getElementById('start-screen');
 
 // Audio elements
 const backgroundMusic = new Audio('assets/background.mp3');
 const shootSound = new Audio('assets/shoot.wav');
 const explosionSound = new Audio('assets/explosion.wav');
-const powerUpSound = new Audio('assets/shoot.wav'); // Using shoot sound as a placeholder
+const powerUpSound = new Audio('assets/shoot.wav');
 
 backgroundMusic.loop = true;
 
@@ -19,10 +20,7 @@ let projectiles = [];
 let powerUps = [];
 let enemySpawnTimer = 0;
 
-// Input state
-const keys = {
-    Space: false
-};
+const keys = { Space: false };
 let isMouseDown = false;
 
 class Projectile {
@@ -34,12 +32,10 @@ class Projectile {
         this.color = color;
         this.speed = speed;
     }
-
     draw() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
-
     update() {
         this.draw();
         this.y -= this.speed;
@@ -56,12 +52,10 @@ class PowerUp {
         this.speed = speed;
         this.type = type;
     }
-
     draw() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.x, this.y, this.width, this.height);
     }
-
     update() {
         this.draw();
         this.y += this.speed;
@@ -83,12 +77,15 @@ class Player {
 
     draw() {
         ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.moveTo(this.x + this.width / 2, this.y);
-        ctx.lineTo(this.x, this.y + this.height);
-        ctx.lineTo(this.x + this.width, this.y + this.height);
-        ctx.closePath();
-        ctx.fill();
+        const w = this.width / 5;
+        const h = this.height / 5;
+
+        // Pixel art for the player's ship
+        ctx.fillRect(this.x + w * 2, this.y, w, h); // Top cockpit
+        ctx.fillRect(this.x + w, this.y + h, w * 3, h); // Body
+        ctx.fillRect(this.x, this.y + h * 2, w * 5, h); // Wings
+        ctx.fillRect(this.x + w, this.y + h * 3, w * 3, h); // Lower Body
+        ctx.fillRect(this.x + w * 2, this.y + h * 4, w, h); // Tail
 
         if (this.shieldTimer > 0) {
             ctx.strokeStyle = '#00f';
@@ -107,12 +104,8 @@ class Player {
             this.shootCooldown = this.rapidFireTimer > 0 ? this.baseShootCooldown / 2 : this.baseShootCooldown;
         }
 
-        if (this.rapidFireTimer > 0) {
-            this.rapidFireTimer--;
-        }
-        if (this.shieldTimer > 0) {
-            this.shieldTimer--;
-        }
+        if (this.rapidFireTimer > 0) this.rapidFireTimer--;
+        if (this.shieldTimer > 0) this.shieldTimer--;
     }
 
     shoot() {
@@ -122,13 +115,13 @@ class Player {
     }
 
     activateRapidFire() {
-        this.rapidFireTimer = 300; // 5 seconds
+        this.rapidFireTimer = 300;
         powerUpSound.currentTime = 0;
         powerUpSound.play();
     }
 
     activateShield() {
-        this.shieldTimer = 600; // 10 seconds
+        this.shieldTimer = 600;
         powerUpSound.currentTime = 0;
         powerUpSound.play();
     }
@@ -143,17 +136,27 @@ class Enemy {
         this.color = color;
         this.speed = speed;
         this.enemyType = enemyType;
-        this.direction = 1; // For zig-zag movement
+        this.direction = 1;
     }
 
     draw() {
         ctx.fillStyle = this.color;
-        ctx.beginPath();
-        ctx.moveTo(this.x + this.width / 2, this.y + this.height);
-        ctx.lineTo(this.x, this.y);
-        ctx.lineTo(this.x + this.width, this.y);
-        ctx.closePath();
-        ctx.fill();
+        const w = this.width / 4;
+        const h = this.height / 4;
+
+        // Inverted pixel art for the enemy ship
+        if (this.enemyType === 'straight') {
+            ctx.fillRect(this.x + w, this.y, w * 2, h); // Top
+            ctx.fillRect(this.x, this.y + h, w * 4, h); // Body/Wings
+            ctx.fillRect(this.x + w, this.y + h * 2, w * 2, h); // Lower Body
+            ctx.fillRect(this.x + w, this.y + h * 3, w * 2, h); // Tail
+        } else { // zigzag
+            ctx.fillRect(this.x, this.y, w * 4, h);
+            ctx.fillRect(this.x + w, this.y + h, w*2, h);
+            ctx.fillRect(this.x, this.y + h*2, w, h);
+            ctx.fillRect(this.x + w*3, this.y + h*2, w, h);
+            ctx.fillRect(this.x + w, this.y + h*3, w*2, h);
+        }
     }
 
     update() {
@@ -182,13 +185,12 @@ function spawnEnemy() {
 }
 
 function detectCollision(a, b) {
-    return a.x < b.x + b.width &&
-           a.x + a.width > b.x &&
-           a.y < b.y + b.height &&
-           a.y + a.height > b.y;
+    return a.x < b.x + b.width && a.x + a.width > b.x && a.y < b.y + b.height && a.y + a.height > b.y;
 }
 
 function startGame() {
+    startScreen.style.display = 'none';
+    canvas.style.display = 'block';
     player = new Player(canvas.width / 2 - 25, canvas.height - 60, 50, 50, '#0ff');
     enemies = [];
     projectiles = [];
@@ -206,6 +208,8 @@ function gameOver() {
     backgroundMusic.pause();
     backgroundMusic.currentTime = 0;
     startButton.style.display = 'block';
+    startScreen.style.display = 'flex';
+    canvas.style.display = 'none';
 }
 
 function updateGame() {
@@ -226,15 +230,11 @@ function updateGame() {
     powerUps = powerUps.filter(pu => pu.y < canvas.height);
     powerUps.forEach(pu => pu.update());
 
-    // Collision detection
     projectiles.forEach((p, pIndex) => {
         enemies.forEach((e, eIndex) => {
             if (detectCollision(p, e)) {
-                if (Math.random() < 0.1) { 
-                    powerUps.push(new PowerUp(e.x, e.y, 20, 20, '#f9a825', 3, 'rapidFire'));
-                } else if (Math.random() < 0.05) {
-                    powerUps.push(new PowerUp(e.x, e.y, 20, 20, '#00f', 3, 'shield'));
-                }
+                if (Math.random() < 0.1) powerUps.push(new PowerUp(e.x, e.y, 20, 20, '#f9a825', 3, 'rapidFire'));
+                else if (Math.random() < 0.05) powerUps.push(new PowerUp(e.x, e.y, 20, 20, '#00f', 3, 'shield'));
 
                 explosionSound.currentTime = 0;
                 explosionSound.play();
@@ -254,49 +254,25 @@ function updateGame() {
 
     powerUps.forEach((pu, puIndex) => {
         if (detectCollision(player, pu)) {
-            if (pu.type === 'rapidFire') {
-                player.activateRapidFire();
-            } else if (pu.type === 'shield') {
-                player.activateShield();
-            }
+            if (pu.type === 'rapidFire') player.activateRapidFire();
+            else if (pu.type === 'shield') player.activateShield();
             powerUps.splice(puIndex, 1);
         }
     });
 }
 
-// Event Listeners
-window.addEventListener('keydown', (e) => {
-    if (e.code in keys) {
-        keys[e.code] = true;
-    }
-});
-
-window.addEventListener('keyup', (e) => {
-    if (e.code in keys) {
-        keys[e.code] = false;
-    }
-});
+window.addEventListener('keydown', (e) => { if (e.code in keys) keys[e.code] = true; });
+window.addEventListener('keyup', (e) => { if (e.code in keys) keys[e.code] = false; });
 
 canvas.addEventListener('mousemove', (e) => {
     if (player) {
         const rect = canvas.getBoundingClientRect();
         let mouseX = e.clientX - rect.left;
-        if (mouseX < player.width / 2) {
-            mouseX = player.width / 2;
-        }
-        if (mouseX > canvas.width - player.width / 2) {
-            mouseX = canvas.width - player.width / 2;
-        }
-        player.x = mouseX - player.width / 2;
+        player.x = Math.max(0, Math.min(canvas.width - player.width, mouseX - player.width / 2));
     }
 });
 
-canvas.addEventListener('mousedown', () => {
-    isMouseDown = true;
-});
-
-canvas.addEventListener('mouseup', () => {
-    isMouseDown = false;
-});
+canvas.addEventListener('mousedown', () => { isMouseDown = true; });
+canvas.addEventListener('mouseup', () => { isMouseDown = false; });
 
 startButton.addEventListener('click', startGame);
