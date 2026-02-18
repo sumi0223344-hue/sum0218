@@ -1,52 +1,30 @@
+# Retro Shooter Game Blueprint
 
-# Blueprint: 섬마을 수석원 (Seommaeul Suseokwon) Website
+## Overview
 
-## 1. Project Overview
+A simple and fun retro-style airplane shooting game.
 
-This project is to create a sophisticated, modern, and visually appealing single-page website for "섬마을 수석원". The goal is to create an online presence that reflects the elegance, tranquility, and artistic value of *suseok* (viewing stones). The site will be a single, immersive page that guides the user through the story and collection of the gallery.
+## Implemented Features
 
-## 2. Design & Style Philosophy
+*   **Player Control:** The player can move the airplane left and right using the arrow keys and shoot projectiles using the spacebar.
+*   **Enemies:** Enemies are periodically generated at the top of the screen and move downwards.
+*   **Diverse Enemy Types:** The game includes two types of enemies: one that moves straight down and another that moves in a zig-zag pattern.
+*   **Projectiles:** The player can fire projectiles to destroy enemies.
+*   **Power-Ups:**
+    *   **Rapid Fire:** Temporarily increases the player's firing rate.
+    *   **Shield:** Temporarily protects the player from enemy collisions.
+*   **Collision Detection:** The game detects collisions between projectiles and enemies, as well as between the player and enemies.
+*   **Scoring:** The score increases by 100 points for each enemy destroyed.
+*   **Game Over:** The game ends when the player collides with an enemy, and the player can restart the game.
+*   **Sound Effects and Music:** The game includes background music, as well as sound effects for shooting, enemy explosions, and collecting power-ups.
 
-*   **Aesthetic:** Minimalist, elegant, and premium. The design will prioritize clean space, high-quality visuals, and a tranquil user experience.
-*   **Color Palette:** A nature-inspired palette using modern `oklch` color spaces for vibrancy and subtlety.
-*   **Typography:** Classic Serif for headings, clean Sans-serif for body text.
-*   **Visuals & Effects:** Full-screen hero, multi-layered drop shadows, and subtle interactive animations.
-*   **Layout:** A responsive, single-page layout using modern CSS (Flexbox, Grid).
+## Style and Design
 
-## 3. Features & Implemented Plan
+*   **Retro Aesthetics:** The game features a retro design with pixelated graphics and a classic color palette.
+*   **UI:** A simple and intuitive user interface displays the score and a "Start Game" button.
 
-### Version 1: Initial Build
+## Future Plans
 
-*   **Structure:** Set up a single-page application with `index.html`, `style.css`, and `main.js`.
-*   **Sections:** Created Header, Hero, Introduction (`#intro`), Gallery (`#gallery`), Philosophy (`#philosophy`), and Footer sections.
-*   **Components:** Implemented a `<stone-card>` Web Component to display individual stones.
-
-### Version 2: Gallery Update
-
-*   **Rename:** Changed "Gallery" to "Suseok Sale" (`#sale`).
-*   **Layout:** Enhanced the grid layout to be more album-like.
-*   **Deployment:** Deployed changes via Git.
-
-### Version 3: Admin, AdSense, & Mobile UX
-
-*   **Admin Page:** Created a secure admin area (`/admin.html`, `/admin-dashboard.html`) with Firebase for login and dynamic item management (Create, Read, Delete).
-*   **Dynamic Gallery:** The main gallery now fetches and displays stone data directly from the Firestore database.
-*   **AdSense Prep:** Added a `privacy.html` page and linked it in the footer.
-*   **Mobile UX:** Implemented responsive design using media queries for better mobile viewing.
-
----
-
-## 4. Current Request: Static Fallback for Gallery
-
-*   **Goal:** Ensure the website's gallery is visually functional even without a database connection by providing static fallback data.
-
-### Action Plan
-
-1.  **Modify `main.js`:**
-    *   Create a function `loadStaticStones()` that populates the gallery with a predefined set of sample suseok data.
-    *   Update the existing data fetching logic. If the Firebase connection fails or is not configured, call `loadStaticStones()` to display the sample data instead of an error message.
-    *   This ensures the gallery is never empty, improving the user experience for first-time visitors or in development environments.
-
-2.  **Deployment:**
-    *   Stage and commit the changes.
-    *   Push the updated version to the `main` branch.
+*   **Levels and difficulty:** Introduce different levels with increasing difficulty and new enemy types.
+*   **High score:** Implement a high score system to save the player's best performance.
+*   **Boss battles:** Add challenging boss battles at the end of each level.

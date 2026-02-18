@@ -1,66 +1,19 @@
-
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>섬마을 수석원</title>
+    <title>Retro Shooter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="main.js" defer></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="#hero" class="logo">섬마을 수석원</a>
-            <ul>
-                <li><a href="#intro">소개</a></li>
-                <li><a href="#sale">수석판매</a></li>
-                <li><a href="#philosophy">철학</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section id="hero">
-            <div class="hero-content">
-                <h1>섬마을 수석원</h1>
-                <p>자연의 예술, 세월의 흔적</p>
-            </div>
-        </section>
-
-        <section id="intro">
-            <h2>수석에 대하여</h2>
-            <p>수석은 자연이 빚어낸 예술 작품으로, 오랜 세월 동안 물과 바람에 씻겨 다듬어진 돌입니다. 저희 섬마을 수석원에서는 단순한 돌이 아닌, 그 안에 담긴 자연의 깊이와 세월의 아름다움을 전하고자 합니다.</p>
-        </section>
-
-        <section id="sale">
-            <h2>수석 판매</h2>
-            <div class="sale-grid">
-                </div>
-        </section>
-
-        <section id="philosophy">
-            <h2>수석의 가치</h2>
-            <div class="philosophy-grid">
-                <div class="philosophy-item">
-                    <h3>형 (Shape)</h3>
-                    <p>돌의 전체적인 모양과 균형감. 산수, 동물, 인물 등 다양한 형상을 발견하는 즐거움을 줍니다.</p>
-                </div>
-                <div class="philosophy-item">
-                    <h3>질 (Quality)</h3>
-                    <p>돌의 표면 질감과 강도. 매끄럽거나 거친 표면, 단단함 등은 돌의 개성을 나타냅니다.</p>
-                </div>
-                <div class="philosophy-item">
-                    <h3>색 (Color)</h3>
-                    <p>돌이 가진 고유의 색과 무늬. 자연의 다채로운 색채가 돌에 스며들어 아름다움을 더합니다.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 섬마을수석원. 경기도 광명시 광명로 651</p>
-        <a href="/privacy.html" class="privacy-link">개인정보처리방침</a>
-    </footer>
+    <div id="game-container">
+        <h1>Retro Shooter</h1>
+        <canvas id="game-canvas" width="800" height="600"></canvas>
+        <div id="ui-container">
+            <h2>Score: <span id="score">0</span></h2>
+            <button id="start-button">Start Game</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
 </body>
 </html>
