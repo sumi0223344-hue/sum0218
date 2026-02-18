@@ -4,9 +4,10 @@ const scoreElement = document.getElementById('score');
 const startButton = document.getElementById('start-button');
 const startScreen = document.getElementById('start-screen');
 
-// Audio (assuming assets folder is present)
-// const backgroundMusic = new Audio('assets/background.mp3');
-// ... (other sounds)
+// Audio placeholders
+// const shootSound = new Audio('assets/shoot.wav');
+// const explosionSound = new Audio('assets/explosion.wav');
+// const powerUpSound = new Audio('assets/powerup.wav');
 
 let score = 0;
 let gameInterval = null;
@@ -19,6 +20,7 @@ let stars = [];
 const keys = { Space: false };
 let isMouseDown = false;
 
+// Starry background functions
 function createStars() {
     stars = [];
     for (let i = 0; i < 200; i++) {
@@ -45,6 +47,32 @@ function updateStars() {
     }
 }
 
+class PowerUp {
+    constructor(x, y, type) {
+        this.x = x;
+        this.y = y;
+        this.size = 15;
+        this.type = type;
+        this.speed = 3;
+        this.color = this.type === 'rapidFire' ? '#f9a825' : '#4fc3f7'; // Orange for rapid, Blue for shield
+    }
+
+    draw() {
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 20;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+    }
+
+    update() {
+        this.draw();
+        this.y += this.speed;
+    }
+}
+
 class Projectile {
     constructor(x, y, width, height, color, speed) {
         this.x = x;
@@ -59,6 +87,7 @@ class Projectile {
         ctx.shadowColor = this.color;
         ctx.shadowBlur = 15;
         ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.shadowBlur = 0;
     }
     update() {
         this.draw();
@@ -75,9 +104,12 @@ class Player {
         this.color = color;
         this.shootCooldown = 15;
         this.baseShootCooldown = 15;
+        this.rapidFireTimer = 0;
+        this.shieldTimer = 0;
     }
 
     draw() {
+        // Draw ship
         ctx.fillStyle = this.color;
         ctx.shadowColor = this.color;
         ctx.shadowBlur = 20;
@@ -87,7 +119,18 @@ class Player {
         ctx.lineTo(this.x + this.width, this.y + this.height);
         ctx.closePath();
         ctx.fill();
-        ctx.shadowBlur = 0; // Reset shadow for other elements
+
+        // Draw shield
+        if (this.shieldTimer > 0) {
+            ctx.strokeStyle = '#4fc3f7';
+            ctx.shadowColor = '#4fc3f7';
+            ctx.shadowBlur = 25;
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(this.x + this.width / 2, this.y + this.height / 2, this.width / 2 + 10, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+        ctx.shadowBlur = 0;
     }
 
     update() {
@@ -95,18 +138,30 @@ class Player {
         if (this.shootCooldown > 0) this.shootCooldown--;
         if ((keys.Space || isMouseDown) && this.shootCooldown === 0) {
             this.shoot();
-            this.shootCooldown = this.baseShootCooldown;
+            this.shootCooldown = this.rapidFireTimer > 0 ? this.baseShootCooldown / 3 : this.baseShootCooldown;
         }
+        if (this.rapidFireTimer > 0) this.rapidFireTimer--;
+        if (this.shieldTimer > 0) this.shieldTimer--;
     }
 
     shoot() {
         // shootSound.play();
         projectiles.push(new Projectile(this.x + this.width / 2 - 2.5, this.y, 5, 20, '#ff0', 7));
     }
+    
+    activateRapidFire() {
+        this.rapidFireTimer = 300; // 5 seconds
+        // powerUpSound.play();
+    }
+
+    activateShield() {
+        this.shieldTimer = 600; // 10 seconds
+        // powerUpSound.play();
+    }
 }
 
 class Enemy {
-    constructor(x, y, width, height, color, speed) {
+     constructor(x, y, width, height, color, speed) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -125,7 +180,7 @@ class Enemy {
         ctx.lineTo(this.x + this.width, this.y);
         ctx.closePath();
         ctx.fill();
-        ctx.shadowBlur = 0; // Reset
+        ctx.shadowBlur = 0;
     }
 
     update() {
@@ -149,19 +204,19 @@ function detectCollision(a, b) {
 function startGame() {
     startScreen.style.display = 'none';
     canvas.style.display = 'block';
+    startButton.style.display = 'none';
     player = new Player(canvas.width / 2 - 25, canvas.height - 60, 50, 50, '#0ff');
     enemies = [];
     projectiles = [];
+    powerUps = [];
     score = 0;
     scoreElement.textContent = score;
     createStars();
-    // backgroundMusic.play();
     gameInterval = setInterval(updateGame, 1000 / 60);
 }
 
 function gameOver() {
     clearInterval(gameInterval);
-    // backgroundMusic.pause();
     startButton.style.display = 'block';
     startScreen.style.display = 'flex';
     canvas.style.display = 'none';
@@ -172,15 +227,22 @@ function updateGame() {
     updateStars();
     player.update();
 
+    // Update projectiles
     projectiles = projectiles.filter(p => p.y > 0);
     projectiles.forEach(p => p.update());
 
+    // Spawn and update enemies
     if (Math.random() < 0.04) {
         spawnEnemy();
     }
     enemies = enemies.filter(e => e.y < canvas.height);
     enemies.forEach(e => e.update());
 
+    // Update power-ups
+    powerUps = powerUps.filter(pu => pu.y < canvas.height);
+    powerUps.forEach(pu => pu.update());
+
+    // Projectile-Enemy collision
     projectiles.forEach((p, pIndex) => {
         enemies.forEach((e, eIndex) => {
             if (detectCollision(p, e)) {
@@ -189,13 +251,36 @@ function updateGame() {
                 enemies.splice(eIndex, 1);
                 score += 100;
                 scoreElement.textContent = score;
+
+                // Spawn power-up chance
+                if (Math.random() < 0.1) {
+                    powerUps.push(new PowerUp(e.x, e.y, 'rapidFire'));
+                } else if (Math.random() < 0.05) {
+                    powerUps.push(new PowerUp(e.x, e.y, 'shield'));
+                }
             }
         });
     });
 
-    enemies.forEach(e => {
+    // Player-PowerUp collision
+    powerUps.forEach((pu, puIndex) => {
+        if (detectCollision(player, pu)) {
+            if (pu.type === 'rapidFire') player.activateRapidFire();
+            else if (pu.type === 'shield') player.activateShield();
+            powerUps.splice(puIndex, 1);
+        }
+    });
+
+    // Player-Enemy collision
+    enemies.forEach((e, eIndex) => {
         if (detectCollision(player, e)) {
-            gameOver();
+            if (player.shieldTimer > 0) {
+                enemies.splice(eIndex, 1);
+                score += 50;
+                scoreElement.textContent = score;
+            } else {
+                gameOver();
+            }
         }
     });
 }
