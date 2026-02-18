@@ -6,7 +6,7 @@ A simple and fun retro-style airplane shooting game.
 
 ## Implemented Features
 
-*   **Player Control:** The player can move the airplane left and right using the arrow keys and shoot projectiles using the spacebar.
+*   **Mouse Control:** The player controls the airplane by moving the mouse left and right. Projectiles are fired using the spacebar or by clicking the mouse.
 *   **Enemies:** Enemies are periodically generated at the top of the screen and move downwards.
 *   **Diverse Enemy Types:** The game includes two types of enemies: one that moves straight down and another that moves in a zig-zag pattern.
 *   **Projectiles:** The player can fire projectiles to destroy enemies.
@@ -21,6 +21,7 @@ A simple and fun retro-style airplane shooting game.
 ## Style and Design
 
 *   **Retro Aesthetics:** The game features a retro design with pixelated graphics and a classic color palette.
+*   **Airplane Graphics:** The player's ship and enemy ships are rendered as simple, geometric airplane shapes (triangles). The player's ship is a vibrant cyan, while enemy ships are grayscale to distinguish them.
 *   **UI:** A simple and intuitive user interface displays the score and a "Start Game" button.
 
 ## Future Plans

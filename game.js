@@ -19,12 +19,11 @@ let projectiles = [];
 let powerUps = [];
 let enemySpawnTimer = 0;
 
-// Keyboard input state
+// Input state
 const keys = {
-    ArrowLeft: false,
-    ArrowRight: false,
     Space: false
 };
+let isMouseDown = false;
 
 class Projectile {
     constructor(x, y, width, height, color, speed) {
@@ -76,7 +75,6 @@ class Player {
         this.width = width;
         this.height = height;
         this.color = color;
-        this.speed = 5;
         this.shootCooldown = 15;
         this.baseShootCooldown = 15;
         this.rapidFireTimer = 0;
@@ -85,7 +83,13 @@ class Player {
 
     draw() {
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.beginPath();
+        ctx.moveTo(this.x + this.width / 2, this.y);
+        ctx.lineTo(this.x, this.y + this.height);
+        ctx.lineTo(this.x + this.width, this.y + this.height);
+        ctx.closePath();
+        ctx.fill();
+
         if (this.shieldTimer > 0) {
             ctx.strokeStyle = '#00f';
             ctx.lineWidth = 3;
@@ -95,16 +99,10 @@ class Player {
 
     update() {
         this.draw();
-        if (keys.ArrowLeft && this.x > 0) {
-            this.x -= this.speed;
-        }
-        if (keys.ArrowRight && this.x < canvas.width - this.width) {
-            this.x += this.speed;
-        }
         if (this.shootCooldown > 0) {
             this.shootCooldown--;
         }
-        if (keys.Space && this.shootCooldown === 0) {
+        if ((keys.Space || isMouseDown) && this.shootCooldown === 0) {
             this.shoot();
             this.shootCooldown = this.rapidFireTimer > 0 ? this.baseShootCooldown / 2 : this.baseShootCooldown;
         }
@@ -150,7 +148,12 @@ class Enemy {
 
     draw() {
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.beginPath();
+        ctx.moveTo(this.x + this.width / 2, this.y + this.height);
+        ctx.lineTo(this.x, this.y);
+        ctx.lineTo(this.x + this.width, this.y);
+        ctx.closePath();
+        ctx.fill();
     }
 
     update() {
@@ -173,7 +176,7 @@ function spawnEnemy() {
     const height = 40;
     const speed = 2;
     const enemyType = Math.random() < 0.5 ? 'straight' : 'zigzag';
-    const color = enemyType === 'straight' ? '#f00' : '#0f0';
+    const color = enemyType === 'straight' ? '#999' : '#ccc';
 
     enemies.push(new Enemy(x, y, width, height, color, speed, enemyType));
 }
@@ -227,9 +230,9 @@ function updateGame() {
     projectiles.forEach((p, pIndex) => {
         enemies.forEach((e, eIndex) => {
             if (detectCollision(p, e)) {
-                if (Math.random() < 0.1) { // 10% chance for rapid fire
+                if (Math.random() < 0.1) { 
                     powerUps.push(new PowerUp(e.x, e.y, 20, 20, '#f9a825', 3, 'rapidFire'));
-                } else if (Math.random() < 0.05) { // 5% chance for shield
+                } else if (Math.random() < 0.05) {
                     powerUps.push(new PowerUp(e.x, e.y, 20, 20, '#00f', 3, 'shield'));
                 }
 
@@ -261,6 +264,7 @@ function updateGame() {
     });
 }
 
+// Event Listeners
 window.addEventListener('keydown', (e) => {
     if (e.code in keys) {
         keys[e.code] = true;
@@ -271,6 +275,28 @@ window.addEventListener('keyup', (e) => {
     if (e.code in keys) {
         keys[e.code] = false;
     }
+});
+
+canvas.addEventListener('mousemove', (e) => {
+    if (player) {
+        const rect = canvas.getBoundingClientRect();
+        let mouseX = e.clientX - rect.left;
+        if (mouseX < player.width / 2) {
+            mouseX = player.width / 2;
+        }
+        if (mouseX > canvas.width - player.width / 2) {
+            mouseX = canvas.width - player.width / 2;
+        }
+        player.x = mouseX - player.width / 2;
+    }
+});
+
+canvas.addEventListener('mousedown', () => {
+    isMouseDown = true;
+});
+
+canvas.addEventListener('mouseup', () => {
+    isMouseDown = false;
 });
 
 startButton.addEventListener('click', startGame);
