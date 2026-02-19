@@ -4,10 +4,10 @@ const scoreElement = document.getElementById('score');
 const startButton = document.getElementById('start-button');
 const startScreen = document.getElementById('start-screen');
 
-// Audio placeholders
-// const shootSound = new Audio('assets/shoot.wav');
-// const explosionSound = new Audio('assets/explosion.wav');
-// const powerUpSound = new Audio('assets/powerup.wav');
+// Audio
+const shootSound = new Audio('assets/sounds/fire.mp3');
+const explosionSound = new Audio('assets/sounds/explosion.mp3');
+const startSound = new Audio('assets/sounds/start.mp3');
 
 let score = 0;
 let gameInterval = null;
@@ -147,18 +147,17 @@ class Player {
     }
 
     shoot() {
-        // shootSound.play();
+        shootSound.currentTime = 0;
+        shootSound.play();
         projectiles.push(new Projectile(this.x + this.width / 2 - 2.5, this.y, 5, 20, '#ff0', 7));
     }
     
     activateRapidFire() {
         this.rapidFireTimer = 300; // 5 seconds
-        // powerUpSound.play();
     }
 
     activateShield() {
         this.shieldTimer = 600; // 10 seconds
-        // powerUpSound.play();
     }
 }
 
@@ -216,6 +215,8 @@ function startGame() {
     createStars();
     bonusImageShown = false;
     bonusImageEndTime = 0;
+    startSound.currentTime = 0;
+    startSound.play();
     gameInterval = setInterval(updateGame, 1000 / 60);
 }
 
@@ -250,7 +251,8 @@ function updateGame() {
     projectiles.forEach((p, pIndex) => {
         enemies.forEach((e, eIndex) => {
             if (detectCollision(p, e)) {
-                // explosionSound.play();
+                explosionSound.currentTime = 0;
+                explosionSound.play();
                 projectiles.splice(pIndex, 1);
                 enemies.splice(eIndex, 1);
                 score += 100;
@@ -283,6 +285,8 @@ function updateGame() {
                 score += 50;
                 scoreElement.textContent = score;
             } else {
+                explosionSound.currentTime = 0;
+                explosionSound.play();
                 gameOver();
             }
         }
