@@ -1,0 +1,21 @@
+{
+  "name": "cosmic-wars",
+  "version": "1.0.0",
+  "description": "A retro-style arcade space shooter game.",
+  "main": "game.js",
+  "scripts": {
+    "deploy": "gh-pages -d .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://sumi0223344-hue.github.io/sum0218",
+  "keywords": [
+    "game",
+    "arcade",
+    "shooter"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}

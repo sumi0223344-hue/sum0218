@@ -1,0 +1,20 @@
+
+# Dependencies
+node_modules
+
+# Logs
+firebase-debug.log
+npm-debug.log
+
+# IDE settings
+.idx
+.vscode
+
+# Firebase config
+firebase.json
+firestore.indexes.json
+firestore.rules
+
+# Other
+GEMINI.md
+blueprint.md
