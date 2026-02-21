@@ -1,25 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>Retro Shooter</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tsm223 - 선물 거래 신호</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .main-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #f4f4f4;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            background: #333;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-    <video autoplay muted loop id="background-video">
-        <source src="https://cdn.midjourney.com/video/e6e2d28c-e452-4808-afdc-c4f08223d84e/1.mp4" type="video/mp4">
-    </video>
+    <header>
+        <h1>Tsm223</h1>
+    </header>
 
-    <div id="game-container">
-        <div id="start-screen">
-            <h1>Retro Shooter</h1>
-        </div>
-        <canvas id="game-canvas" width="800" height="600" style="display: none;"></canvas>
-        <div id="ui-container">
-            <h2>Score: <span id="score">0</span></h2>
-            <button id="start-button">Start Game</button>
+    <div class="container">
+        <div class="main-content">
+            <p>본 사이트는 CME 선물 시장의 데이터를 기반으로 투자에 참고할만한 정보를 제공합니다. 아래 목록은 일반적으로 거래량이 많은 주요 선물 종목들입니다. (주의: 아래 데이터는 실제 시세 및 거래량과 무관한 예시이며, 기술적 분석이 포함되어 있지 않습니다.)</p>
+            
+            <h2>매수 유리 후보</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>순위</th>
+                        <th>종목명 (심볼)</th>
+                        <th>거래량 (예시)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Crude Oil (CL)</td>
+                        <td>3,200,000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Gold (GC)</td>
+                        <td>2,800,000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>10-Year T-Note (ZN)</td>
+                        <td>2,500,000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Treasury Bond (ZB)</td>
+                        <td>2,100,000</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Natural Gas (NG)</td>
+                        <td>1,900,000</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Corn (ZC)</td>
+                        <td>1,750,000</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Soybeans (ZS)</td>
+                        <td>1,600,000</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Silver (SI)</td>
+                        <td>1,450,000</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Copper (HG)</td>
+                        <td>1,300,000</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Wheat (ZW)</td>
+                        <td>1,100,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 style="margin-top: 40px;">매도 유리 후보</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>순위</th>
+                        <th>종목명 (심볼)</th>
+                        <th>거래량 (예시)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Euro FX (6E)</td>
+                        <td>2,900,000</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Japanese Yen (6J)</td>
+                        <td>2,600,000</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>British Pound (6B)</td>
+                        <td>2,300,000</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Australian Dollar (6A)</td>
+                        <td>2,000,000</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Canadian Dollar (6C)</td>
+                        <td>1,800,000</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Lean Hogs (HE)</td>
+                        <td>1,650,000</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Live Cattle (LE)</td>
+                        <td>1,500,000</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>RBOB Gasoline (RB)</td>
+                        <td>1,350,000</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Heating Oil (HO)</td>
+                        <td>1,200,000</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Lumber (LBS)</td>
+                        <td>1,000,000</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <script src="game.js"></script>
+
+    <footer>
+        <p>Copyright &copy; 2023 Tsm223. All Rights Reserved.</p>
+        <p>본 사이트에서 제공하는 정보는 투자 참고용이며, 투자에 대한 최종 결정은 투자자 본인의 판단과 책임하에 이루어져야 합니다. 본 정보는 어떠한 경우에도 법적 책임을 지지 않습니다.</p>
+    </footer>
 </body>
 </html>
