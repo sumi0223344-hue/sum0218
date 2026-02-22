@@ -4,8 +4,702 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 명리학 프리미엄 토정비결</title>
+    <meta name="description" content="AI 명리학 프리미엄 토정비결. 인공지능이 분석하는 2026년 신년 사주와 궁합. 당신의 운명을 심도있게 분석하고, 미래를 위한 조언을 확인하세요.">
+    <meta name="keywords" content="토정비결, 신년운세, 2026년 운세, 사주, 궁합, AI, 명리학, 운세">
+    <meta name="author" content="AI Architect">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap');
+
+        :root {
+            --bg-color: #1a1a2e;
+            --primary-color: #162447;
+            --accent-color: #f7d794;
+            --accent-hover: #e6c584;
+            --text-color: #e0e0e0;
+            --text-muted: #b0b0c0;
+            --border-color: #4a4a6a;
+            --input-bg: #1f2a52;
+            --basis-bg: rgba(0,0,0,0.2);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Noto Serif KR', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+        
+        header {
+            width: 100%;
+            background-color: rgba(22, 36, 71, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 700px;
+            margin: 0 auto;
+            height: 60px;
+        }
+
+        .top-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0 15px;
+            font-size: 1em;
+            font-weight: 600;
+            transition: color 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        .top-nav a:hover { color: var(--accent-color); }
+        .top-nav a.active { color: var(--accent-color); }
+        .top-nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            right: 15px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            background-color: var(--primary-color);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            border: 1px solid #c0c090;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .main-content { display: block; }
+
+        h1 {
+            color: var(--accent-color);
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .external-link {
+            display: block;
+            margin-top: -5px;
+            margin-bottom: 15px;
+            color: var(--accent-hover);
+            text-decoration: none;
+            font-size: 1em;
+            transition: color 0.3s;
+        }
+        .external-link:hover {
+            color: var(--accent-color);
+            text-decoration: underline;
+        }
+
+        .privacy-notice {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 15px 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-family: 'Noto Serif KR', serif;
+            transition: color 0.3s, border-bottom 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -1px;
+        }
+        .tab-button.active {
+            color: var(--accent-color);
+            border-bottom: 3px solid var(--accent-color);
+            font-weight: 600;
+        }
+
+        .tab-content { display: none; animation: fadeIn 0.8s; }
+        .tab-content.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group, .compat-group { margin-bottom: 20px; }
+        .compat-group h3 {
+            color: #c0c090;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .input-fields {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .input-fields select, .input-fields input {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1em;
+            flex-grow: 1;
+            min-width: 80px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .input-fields select:focus, .input-fields input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(247, 215, 148, 0.2);
+        }
+        
+        .input-fields select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2212%22%20height%3D%228%22%20viewBox%3D%220%200%2012%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1.41%200.58L6%205.17L10.59%200.58L12%202L6%208L0%202L1.41%200.58Z%22%20fill%3D%22%23e0e0e0%22/%3E%3C/svg%3E');
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+        }
+
+        .main-button {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif KR', serif;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .main-button:hover {
+            background-color: var(--accent-hover);
+            box-shadow: 0 5px 15px rgba(247, 215, 148, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .result {
+            margin-top: 40px;
+            text-align: left;
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+        }
+        
+        .result h2 {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .result h2 svg { margin-right: 12px; }
+
+        .result p {
+            font-size: 1.1em;
+            line-height: 1.9;
+            color: var(--text-color);
+            white-space: pre-wrap;
+        }
+        
+        .result-basis {
+            background-color: var(--basis-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+        }
+        .result-basis h3 {
+            color: var(--accent-hover);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .result-basis p {
+            font-size: 1em;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+        
+        .share-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .share-button {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Noto Serif KR', serif;
+        }
+        .share-button:hover {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        #copy-message {
+            margin-top: 10px;
+            color: var(--accent-hover);
+            font-size: 0.9em;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .info-section {
+            display: none;
+            text-align: left;
+            padding: 40px;
+            background-color: var(--primary-color);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 700px;
+            border: 1px solid #c0c090;
+            margin-top: 40px;
+            animation: fadeIn 0.8s;
+        }
+        .info-section h2 {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .info-section p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .info-section a { color: var(--accent-hover); }
+        .info-section strong {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        
+        footer {
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 0.9em;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--accent-color); }
+        .footer-copyright {
+            font-size: 0.8em;
+            color: var(--text-muted);
+            margin-top: 15px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 0 10px;
+            }
+            .top-nav {
+                height: auto;
+                flex-wrap: wrap;
+                padding: 10px 0;
+                justify-content: space-around;
+            }
+            .top-nav a {
+                padding: 10px;
+                font-size: 0.9em;
+                flex-basis: 30%; /* 3 items per row */
+                text-align: center;
+                justify-content: center;
+            }
+            .top-nav a.active::after {
+                display: none;
+            }
+            .container, .info-section {
+                padding: 20px;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .tabs {
+                flex-wrap: wrap;
+            }
+            .tab-button {
+                padding: 12px 15px;
+                font-size: 1em;
+            }
+            .input-fields {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .footer-links a {
+                margin: 0;
+            }
+        }
+
+    </style>
 </head>
 <body>
-    <h1>AI 명리학 프리미엄 토정비결</h1>
+    <header>
+        <nav class="top-nav">
+            <a href="#" onclick="showPage('home'); return false;" class="active">홈</a>
+            <a href="#" onclick="showPage('about'); return false;">소개</a>
+            <a href="#" onclick="showPage('contact'); return false;">문의</a>
+            <a href="#" onclick="showPage('privacy'); return false;">개인정보</a>
+            <a href="#" onclick="showPage('terms'); return false;">이용약관</a>
+        </nav>
+    </header>
+
+    <div id="home-container" class="container">
+        <div class="main-content">
+            <h1>AI 명리학 토정비결</h1>
+            <a href="https://www.google.com/search?q=타로점" target="_blank" class="external-link">다른 운세 보러가기</a>
+            <p class="privacy-notice">(입력하신 정보는 절대 저장, 전송되지 않습니다)</p>
+            <div class="tabs">
+                <button class="tab-button active" onclick="showTab('tojeong', this)">신년 사주 분석</button>
+                <button class="tab-button" onclick="showTab('compatibility', this)">궁합 분석</button>
+            </div>
+
+            <div id="tojeong" class="tab-content active">
+                 <div class="input-group"><div class="input-fields">
+                        <input type="number" id="year" placeholder="출생년도 (4자리)" required>
+                        <select id="month" required></select>
+                        <select id="day" required></select>
+                        <select id="hour" required></select>
+                </div></div>
+                <button class="main-button" onclick="showFortune('tojeong')">AI 신년 사주 분석 보기</button>
+            </div>
+            <div id="compatibility" class="tab-content">
+                 <div class="compat-group"><h3>첫 번째 분</h3><div class="input-fields">
+                        <input type="number" id="year1" placeholder="출생년도" required><select id="month1" required></select><select id="day1" required></select>
+                </div></div>
+                <div class="compat-group"><h3>두 번째 분</h3><div class="input-fields">
+                        <input type="number" id="year2" placeholder="출생년도" required><select id="month2" required></select><select id="day2" required></select>
+                </div></div>
+                <button class="main-button" onclick="showFortune('compatibility')">AI 궁합 분석 보기</button>
+            </div>
+            
+            <div id="result" class="result">
+                <div id="result-basis" class="result-basis"></div>
+                <h2 id="result-title"></h2>
+                <p id="result-text"></p>
+                <div class="share-section"><button class="share-button" onclick="copyResult()">결과 공유하기</button><p id="copy-message">결과가 복사되었습니다!</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="about-container" class="info-section">
+        <h2>소개</h2>
+        <p>AI 명리학 토정비결은 최첨단 인공지능 기술과 동양의 오랜 지혜, 명리학을 결합하여 사용자에게 깊이 있는 운세 분석을 제공하는 서비스입니다. 저희는 사용자가 자신의 삶을 더 깊이 이해하고, 미래를 긍정적으로 설계하는 데 도움을 드리는 것을 목표로 합니다.</p>
+        <p>본 서비스에서 제공되는 모든 운세 정보는 엔터테인먼트 목적으로 제작되었으며, 내용의 완전성이나 정확성을 보증하지 않습니다. 중요한 결정의 근거로 사용되어서는 안 됩니다.</p>
+    </div>
+    <div id="contact-container" class="info-section">
+        <h2>문의하기</h2>
+        <p>서비스에 대한 문의나 제휴 제안은 아래 이메일로 연락주시기 바랍니다.<br>Email: <a href="mailto:contact@example.com">contact@example.com</a></p>
+    </div>
+    <div id="privacy-container" class="info-section">
+        <h2>개인정보처리방침</h2>
+        <p><strong>1. 개인정보의 수집 및 이용 목적</strong><br>본 서비스는 사용자가 입력한 생년월일시 정보를 오직 운세 결과 생성 목적으로만 사용합니다. 어떠한 개인정보도 서버에 저장, 기록하거나 제3자에게 전송하지 않습니다. 모든 정보는 사용자의 브라우저 내에서만 처리됩니다.</p>
+        <p><strong>2. 개인정보의 보유 및 이용기간</strong><br>운세 결과는 생성 즉시 사용자에게 보여지며, 페이지를 벗어나는 순간 모든 입력 정보는 파기됩니다. 서비스는 사용자의 어떠한 정보도 보유하지 않습니다.</p>
+        <p><strong>3. 광고에 관한 정보</strong><br>본 사이트는 Google AdSense를 통한 광고를 포함하고 있을 수 있습니다. Google은 개인화된 광고를 제공하기 위해 쿠키를 사용할 수 있습니다. 사용자는 Google 광고 설정을 통해 개인화 광고를 선택 해제할 수 있습니다. 자세한 내용은 <a href="https://policies.google.com/technologies/ads" target="_blank">Google의 광고 정책</a>을 참조하십시오.</p>
+    </div>
+    <div id="terms-container" class="info-section">
+        <h2>이용약관</h2>
+        <p><strong>제1조 (목적)</strong><br>본 약관은 AI 명리학 토정비결 서비스(이하 "서비스")의 이용과 관련하여 서비스와 사용자 간의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
+        <p><strong>제2조 (서비스의 내용)</strong><br>서비스는 AI를 통해 생성된 명리학 기반 운세 콘텐츠를 제공합니다. 제공되는 모든 콘텐츠는 오락 및 참고 목적으로만 사용되어야 하며, 법적, 의학적, 재정적 조언으로 해석되어서는 안 됩니다.</p>
+        <p><strong>제3조 (서비스 이용의 제한)</strong><br>사용자는 서비스를 개인적이고 비상업적인 목적으로만 이용할 수 있습니다. 서비스의 콘텐츠를 무단으로 복제, 배포, 수정하는 행위는 금지됩니다.</p>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#" onclick="showPage('about'); return false;">소개</a>
+            <a href="#" onclick="showPage('contact'); return false;">문의</a>
+            <a href="#" onclick="showPage('privacy'); return false;">개인정보처리방침</a>
+            <a href="#" onclick="showPage('terms'); return false;">이용약관</a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2024 AI 명리학 프리미엄 토정비결. All Rights Reserved. For Entertainment Purposes Only.
+        </div>
+    </footer>
+
+    <script>
+// --- AI Saju Narrative Engine "Architect" v2.0 ---
+// Restored from the ashes, with enhanced stability and beauty.
+
+const zodiacs = {
+    '쥐': { emoji: '🐭', lacking: '화(火)', dominant: '수(水)' }, '소': { emoji: '🐮', lacking: '목(木)', dominant: '토(土)' }, '호랑이': { emoji: '🐯', lacking: '금(金)', dominant: '목(木)' }, '토끼': { emoji: '🐰', lacking: '금(金)', dominant: '목(木)' }, '용': { emoji: '🐲', lacking: '수(水)', dominant: '토(土)' }, '뱀': { emoji: '🐍', lacking: '수(水)', dominant: '화(火)' }, '말': { emoji: '🐴', lacking: '수(水)', dominant: '화(火)' }, '양': { emoji: '🐑', lacking: '목(木)', dominant: '토(土)' }, '원숭이': { emoji: '🐵', lacking: '목(木)', dominant: '금(金)' }, '닭': { emoji: '🐔', lacking: '목(木)', dominant: '금(金)' }, '개': { emoji: '🐶', lacking: '수(水)', dominant: '토(土)' }, '돼지': { emoji: '🐷', lacking: '화(火)', dominant: '수(水)' }
+};
+
+const sajuFortuneData = {
+    lacks_목: {
+        basis: "당신 사주에 부족한 목(木) 기운은 성장과 시작의 동력입니다. 2026년 병오년의 강력한 화(火) 기운은 당신의 목(木) 기운을 더욱 필요로 하므로(목생화), 에너지가 빠르게 소진될 수 있습니다. 의식적인 휴식과 재충전을 통해 운명의 기관차에 땔감을 계속 공급해야 하는 해입니다.",
+        overall: "당신의 열정과 아이디어를 실현시키기 위해 많은 에너지를 쏟아붓게 되는, 매우 바쁜 한 해가 될 것입니다. 성과도 크지만, 그만큼 심신의 소모도 크다는 것을 명심해야 합니다. 혼자 모든 것을 짊어지려 하지 말고, 주변 사람들과 협력하여 에너지를 효율적으로 사용하는 지혜가 필요합니다. 올해는 당신의 한계를 시험하는 해가 될 것이며, 이 과정을 통해 당신의 그릇이 얼마나 큰지 스스로 확인하게 될 것입니다. 선택과 집중의 지혜를 발휘하여, 가장 중요한 목표 하나에 모든 에너지를 집중하는 전략이 유효합니다. 흩어진 에너지는 연기처럼 사라질 뿐, 결실을 보기 어렵습니다. 당신의 열정이 의미 있는 결과로 이어지도록, 냉철한 계획과 꾸준한 자기 관리가 반드시 병행되어야 합니다.",
+        work: "새로운 사업을 구상하거나, 창의적인 아이디어를 내는 데는 유리하지만, 이를 실제로 추진하고 유지하는 데 많은 노력이 필요합니다. 과로로 인한 번아웃을 가장 경계해야 합니다. 단기적인 성과에 집착하기보다는, 장기적인 안목으로 페이스를 조절하는 전략이 중요합니다. 당신의 머릿속에는 혁신적인 아이디어들이 샘솟지만, 목(木) 기운의 부족은 이를 현실에 뿌리내리게 할 추진력을 약화시킵니다. 따라서 좋은 동료나 파트너를 만나는 것이 올해 직업운의 핵심입니다. 당신이 아이디어 뱅크의 역할을 한다면, 끈기 있고 현실적인 동료가 그 아이디어를 실행에 옮기는 그림이 가장 이상적입니다.",
+        wealth: "열정적인 활동이 바로 재물로 연결되지 않는 한 해입니다. 오히려 새로운 일을 시작하거나, 여러 가지 시도를 하는 과정에서 초기 투자 비용이 많이 발생할 수 있습니다. 수입보다 지출이 많아지기 쉬운 구조이므로, 철저한 재무 계획 없이는 재정적인 어려움에 처할 수 있습니다. 특히 ‘한 방’을 노리는 투기성 투자는 절대적으로 피해야 합니다. 올해의 재물운은 돈을 버는 것보다 ‘새로운 가치를 창출하는 경험’에 투자한다고 생각하는 것이 좋습니다. 당장의 수익보다는 미래의 자산이 될 기술을 배우거나, 건강과 지식에 투자하는 것이 가장 현명한 재테크입니다.",
+        love: "불꽃처럼 타오르는, 강렬하지만 짧은 만남이 잦아지는 해입니다. 목(木) 기운의 부족은 관계를 꾸준히 유지하고 성장시키는 힘의 부족을 의미하는데, 여기에 강력한 화(火) 기운이 더해지니, 관계가 시작되자마자 너무 뜨겁게 타올라 한순간에 재가 되어버리기 쉽습니다. 만남과 헤어짐이 반복되면서 감정적인 소모가 매우 클 수 있습니다. 연인이 있는 경우, 상대방에게 너무 많은 것을 요구하거나, 자신의 열정만을 강요하다가 관계가 파국으로 치닫지 않도록 주의해야 합니다. 의식적으로 함께 취미를 즐기거나, 차분한 대화를 통해 관계의 ‘땔감’을 꾸준히 공급해주는 노력이 절실합니다.",
+        health: "간과 담에 해당하는 목(木) 기운이 부족한 상태에서, 심장을 상징하는 화(火) 기운이 강하게 들어오니, ‘심화상염(心火上炎)’ 즉, 심장의 불길이 위로 치솟아 당신을 괴롭히기 쉽습니다. 이는 안구 건조, 두통, 불면증 등의 증상으로 나타날 수 있습니다. 또한, 에너지 소모가 큰 해이므로, 만성적인 피로와 번아웃에 시달릴 가능성이 높습니다. 당신에게 필요한 것은 의식적인 ‘쉼’과 ‘재충전’입니다. 주말에는 도시를 벗어나 숲이나 공원을 찾아 땅의 기운과 나무의 기운을 보충하는 것이 좋습니다. 잠자리에 들기 전에는 전자기기를 멀리하고, 명상을 통해 과열된 심장의 열기를 식혀주는 습관을 들이는 것이 건강을 지키는 핵심입니다.",
+    },
+    // ... Add more data for lacks_금, lacks_수, lacks_화, lacks_토 for variety
+};
+
+
+let currentTab = 'tojeong';
+
+function showPage(pageName) {
+    document.getElementById('home-container').style.display = 'none';
+    document.querySelectorAll('.info-section').forEach(el => { el.style.display = 'none'; });
+
+    if (pageName === 'home') {
+        document.getElementById('home-container').style.display = 'block';
+    } else {
+        document.getElementById(pageName + '-container').style.display = 'block';
+    }
+
+    document.querySelectorAll('.top-nav a').forEach(link => link.classList.remove('active'));
+    const activeLink = document.querySelector(`.top-nav a[onclick*="showPage('${pageName}')"]`);
+    if(activeLink) activeLink.classList.add('active');
+    
+    window.scrollTo(0, 0);
+}
+
+function showTab(tabName, element) {
+    currentTab = tabName;
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById(tabName).classList.add('active');
+    document.querySelectorAll('.tab-button').forEach(t => t.classList.remove('active'));
+    element.classList.add('active');
+    
+    // Hide result when switching tabs
+    const resultDiv = document.getElementById('result');
+    resultDiv.style.display = 'none';
+    resultDiv.style.opacity = '0';
+}
+
+function getZodiac(year) {
+    const zodiacNames = ['원숭이', '닭', '개', '돼지', '쥐', '소', '호랑이', '토끼', '용', '뱀', '말', '양'];
+    return zodiacNames[year % 12];
+}
+
+
+function showFortune(type) {
+    let title = '', fortuneText = '', icon = '', basisHTML = '', valid = true;
+    const bookIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v2H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M4 7h16v10H4z"/></svg>`;
+    const heartIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+            
+    if (type === 'tojeong') {
+        const year = document.getElementById('year').value;
+        const month = document.getElementById('month').value;
+        const day = document.getElementById('day').value;
+        const hour = document.getElementById('hour').value;
+        
+        if (!year || !month || !day || !hour || parseInt(year) < 1920 || parseInt(year) > 2024) {
+            alert('생년월일시를 모두 정확히 입력해주세요. (1920-2024년)');
+            valid = false;
+        } else {
+            const zodiacName = getZodiac(year);
+            const zodiacInfo = zodiacs[zodiacName];
+            // Simple logic: Use the first dataset for demonstration
+            const data = sajuFortuneData.lacks_목; 
+            
+            title = `AI 명리학 2026년 신년 사주 분석`;
+            fortuneText = `[총운]
+${data.overall}
+
+[직업운]
+${data.work}
+
+[재물운]
+${data.wealth}
+
+[애정운]
+${data.love}
+
+[건강운]
+${data.health}`;
+            icon = bookIcon;
+            basisHTML = `<h3>AI 사주 원국(原局) 분석</h3><p>AI가 당신의 출생년도를 분석한 결과, 당신은 <strong>${zodiacInfo.emoji} ${zodiacName}띠</strong>이며, 당신의 사주에는 본질적으로 <strong>${zodiacInfo.dominant} 기운이 강하고, ${zodiacInfo.lacking} 기운이 부족한 경향</strong>이 있습니다.</p><h3>2026년 운세 상호작용 분석</h3><p>${data.basis}</p>`;
+        }
+    } else if (type === 'compatibility') {
+        const year1 = document.getElementById('year1').value;
+        const year2 = document.getElementById('year2').value;
+
+        if (!year1 || !year2 || parseInt(year1) < 1920 || parseInt(year2) < 1920) {
+            alert('두 분의 출생년도를 정확히 입력해주세요.');
+            valid = false;
+        } else {
+            const zodiac1 = getZodiac(year1);
+            const zodiac2 = getZodiac(year2);
+            const dominant1 = zodiacs[zodiac1].dominant;
+            const dominant2 = zodiacs[zodiac2].dominant;
+            
+            title = `${zodiacs[zodiac1].emoji}${zodiac1}띠와 ${zodiacs[zodiac2].emoji}${zodiac2}띠 궁합 분석`;
+            icon = heartIcon;
+            basisHTML = `<h3>AI 오행 궁합 분석</h3><p>한 분은 <strong>${dominant1}</strong> 기운이, 다른 한 분은 <strong>${dominant2}</strong> 기운이 강하게 나타납니다. AI가 두 분의 핵심 기운의 상호작용을 분석한 결과, 서로에게 부족한 점을 채워주는 이상적인 관계가 될 수 있습니다. 함께할 때 더 큰 시너지를 발휘할 것입니다.</p>`;
+            fortuneText = `[궁합 총평]
+두 분은 서로 다른 매력으로 강하게 이끌리지만, 때로는 그 다름이 갈등의 원인이 될 수도 있습니다. 하지만 서로의 차이를 존중하고 이해하려는 노력을 멈추지 않는다면, 세상에서 가장 특별하고 강력한 유대감을 형성할 수 있는 잠재력을 지닌 커플입니다.
+
+[관계 조언]
+한 분이 새로운 아이디어를 제시하고 방향을 이끈다면, 다른 한 분은 그것을 현실적인 계획으로 만들고 안정적으로 실행하는 역할을 맡을 때 최고의 시너지를 낼 수 있습니다. 서로의 장점을 믿고 각자의 역할을 존중하는 것이 관계 발전의 핵심입니다.`;
+        }
+    }
+    
+    if (!valid) return;
+
+    document.getElementById('result-basis').innerHTML = basisHTML;
+    document.getElementById('result-title').innerHTML = icon + title;
+    document.getElementById('result-text').textContent = fortuneText;
+    
+    const resultDiv = document.getElementById('result');
+    resultDiv.style.display = 'block';
+    setTimeout(() => {
+        resultDiv.style.opacity = '1';
+        resultDiv.style.transform = 'translateY(0)';
+        resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 10);
+}
+
+function copyResult() {
+    const basis = document.getElementById('result-basis').innerText;
+    const title = document.getElementById('result-title').textContent;
+    const text = document.getElementById('result-text').textContent;
+    const url = window.location.href;
+    const fullText = `[AI 명리학 토정비결]
+
+${basis}
+
+${title}
+
+${text}
+
+- ${url} -`;
+
+    const showSuccessMessage = () => {
+        const msg = document.getElementById('copy-message');
+        msg.style.opacity = '1';
+        setTimeout(() => { msg.style.opacity = '0'; }, 2000);
+    };
+    
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(fullText).then(showSuccessMessage).catch(err => {
+             alert("클립보드 복사에 실패했습니다.");
+        });
+    } else {
+        // Fallback for older browsers
+        const textArea = document.createElement("textarea");
+        textArea.value = fullText;
+        textArea.style.position = "fixed"; textArea.style.top = 0; textArea.style.left = 0; textArea.style.opacity = 0;
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showSuccessMessage();
+        } catch (err) {
+            alert("클립보드 복사에 실패했습니다.");
+        }
+        document.body.removeChild(textArea);
+    }
+}
+
+function populateSelect(id, start, end, suffix, placeholder) {
+    const select = document.getElementById(id);
+    if (!select) return;
+    select.innerHTML = '';
+    
+    if (placeholder) {
+        const ph_option = document.createElement('option');
+        ph_option.value = "";
+        ph_option.textContent = placeholder;
+        ph_option.disabled = true;
+        ph_option.selected = true;
+        select.appendChild(ph_option);
+    }
+
+    for (let i = start; i <= end; i++) {
+        const option = document.createElement('option');
+        option.value = i;
+        option.textContent = i + suffix;
+        select.appendChild(option);
+    }
+}
+
+window.onload = () => { 
+    ['', '1', '2'].forEach(suffix => { 
+        populateSelect('month' + suffix, 1, 12, '월', '출생월'); 
+        populateSelect('day' + suffix, 1, 31, '일', '출생일'); 
+        if(suffix === '') populateSelect('hour', 0, 23, '시', '출생시'); 
+    }); 
+    
+    showPage('home');
+    const initialTab = document.querySelector('.tab-button.active');
+    if(initialTab) showTab('tojeong', initialTab);
+};
+    </script>
 </body>
 </html>
