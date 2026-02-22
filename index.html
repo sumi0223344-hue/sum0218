@@ -356,17 +356,18 @@
                 padding: 0 10px;
             }
             .top-nav {
-                height: auto;
-                flex-wrap: wrap;
-                padding: 10px 0;
-                justify-content: space-around;
+                overflow-x: auto;
+                justify-content: flex-start;
+                -ms-overflow-style: none; 
+                scrollbar-width: none; 
+            }
+            .top-nav::-webkit-scrollbar { 
+                display: none; 
             }
             .top-nav a {
-                padding: 10px;
+                flex-shrink: 0;
+                padding: 10px 15px;
                 font-size: 0.9em;
-                flex-basis: 30%; /* 3 items per row */
-                text-align: center;
-                justify-content: center;
             }
             .top-nav a.active::after {
                 display: none;
@@ -514,7 +515,7 @@ const sajuFortuneData = {
 };
 
 const tarotCardData = [
-    { name: '마법사', image: 'https://i.ibb.co/L0P9z8G/magician.jpg', interpretation: '지금은 당신의 창의력과 재능을 발휘할 최적의 시기입니다. 망설이지 말고 당신의 아이디어를 현실로 옮기세요. 구체적인 목표를 설정하고, 주도적으로 계획을 실행한다면 기대 이상의 성과를 얻을 것입니다. 예를 들어, 새로운 프로젝트를 시작하거나, 미뤄왔던 배움을 시작하기에 완벽한 때입니다. 당신의 손에 모든 도구가 쥐어져 있으니, 자신감을 갖고 첫걸음을 내딛으세요.' },
+    { name: '마법사', image: 'https://i.ibb.co/9vBQFND/magician.jpg', interpretation: '지금은 당신의 창의력과 재능을 발휘할 최적의 시기입니다. 망설이지 말고 당신의 아이디어를 현실로 옮기세요. 구체적인 목표를 설정하고, 주도적으로 계획을 실행한다면 기대 이상의 성과를 얻을 것입니다. 예를 들어, 새로운 프로젝트를 시작하거나, 미뤄왔던 배움을 시작하기에 완벽한 때입니다. 당신의 손에 모든 도구가 쥐어져 있으니, 자신감을 갖고 첫걸음을 내딛으세요.' },
     { name: '여황제', image: 'https://i.ibb.co/P9pD2f8/empress.jpg', interpretation: '현재 당신의 삶은 물질적, 감정적으로 매우 풍요로운 상태입니다. 이 에너지를 활용하여 주변 사람들을 돌보고 사랑을 나누어보세요. 오랫동안 구상해왔던 창작 활동을 시작하거나, 집이나 방을 아름답게 꾸미는 등, 미적 감각을 발휘하는 활동이 큰 만족감을 줄 것입니다. 자신과 타인에게 너그러워지고, 삶의 즐거움을 만끽하며 감사하는 마음을 가질 때 더 큰 풍요가 찾아옵니다.' },
     { name: '운명의 수레바퀴', image: 'https://i.ibb.co/9rGFx1t/wheel-of-fortune.jpg', interpretation: '당신의 삶에 중요한 전환점이 찾아왔습니다. 지금 겪는 변화는 예상치 못했을 수 있지만, 결국 당신을 더 나은 방향으로 이끌 긍정적인 기회가 될 것입니다. 저항하기보다는 변화의 흐름을 받아들이고 유연하게 대처하세요. 예를 들어, 새로운 제안이나 기회가 온다면 긍정적으로 검토해보는 것이 좋습니다. 당신의 운이 상승세에 있으니, 긍정적인 마음으로 새로운 장을 맞이하세요.' },
     { name: '연인', image: 'https://i.ibb.co/mSSt26b/lovers.jpg', interpretation: '인간관계, 특히 연애에 있어 중요한 진전이 있거나, 중대한 선택의 순간을 맞이하게 됩니다. 여러 가능성 앞에서 고민하고 있다면, 외부의 의견보다는 당신의 마음이 진정으로 원하는 것이 무엇인지 깊이 성찰해야 합니다. 현재의 관계를 한 단계 발전시키거나, 새로운 관계를 시작하기에 좋은 시기입니다. 당신의 가치관에 부합하는 진실된 선택을 할 때, 관계는 더욱 깊어지고 조화로워질 것입니다.' },
