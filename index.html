@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI 명리학 프리미엄 토정비결</title>
+    <meta name="description" content="AI 명리학 프리미엄 토정비결. 인공지능이 분석하는 2026년 신년 사주와 궁합. 당신의 운명을 심도있게 분석하고, 미래를 위한 조언을 확인하세요.">
+    <meta name="keywords" content="토정비결, 신년운세, 2026년 운세, 사주, 궁합, AI, 명리학, 운세">
+    <meta name="author" content="AI Architect">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0000000000000000" crossorigin="anonymous"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap');
 
@@ -19,8 +23,8 @@
             --basis-bg: rgba(0,0,0,0.2);
         }
 
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Noto Serif KR', serif; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 40px 20px; box-sizing: border-box; }
-        .container { background-color: var(--primary-color); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); width: 100%; max-width: 700px; text-align: center; border: 1px solid #c0c090; transition: all 0.3s ease; }
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Noto Serif KR', serif; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 40px 20px; box-sizing: border-box; }
+        .container { background-color: var(--primary-color); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); width: 100%; max-width: 700px; text-align: center; border: 1px solid #c0c090; transition: all 0.3s ease; margin-bottom: 40px; }
         h1 { color: var(--accent-color); font-size: 2.5em; margin-bottom: 5px; font-weight: 700; letter-spacing: 2px; }
         .external-link { display: block; margin-top: -5px; margin-bottom: 15px; color: var(--accent-hover); text-decoration: none; font-size: 1em; transition: color 0.3s; }
         .external-link:hover { color: var(--accent-color); text-decoration: underline; }
@@ -50,16 +54,27 @@
         .share-button { background-color: transparent; color: var(--accent-color); border: 1px solid var(--accent-color); padding: 10px 25px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s ease; font-family: 'Noto Serif KR', serif; }
         .share-button:hover { background-color: var(--accent-color); color: var(--primary-color); }
         #copy-message { margin-top: 10px; color: var(--accent-hover); font-size: 0.9em; opacity: 0; transition: opacity 0.4s; }
+        
+        footer { width: 100%; max-width: 700px; text-align: center; padding: 20px 0; border-top: 1px solid var(--border-color); margin-top: 20px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; margin: 0 15px; font-size: 0.9em; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--accent-color); }
+        .footer-copyright { font-size: 0.8em; color: var(--text-muted); margin-top: 15px; }
+
+        .info-section { display: none; text-align: left; padding: 20px; background-color: var(--basis-bg); border-radius: 8px; margin-top: 20px; }
+        .info-section h2 { color: var(--accent-color); }
+        .info-section p { color: var(--text-muted); line-height: 1.7; }
+        .info-section a { color: var(--accent-hover); }
+
     </style>
 </head>
 <body>
     <div class="container">
         <h1>AI 명리학 토정비결</h1>
         <a href="https://www.google.com/search?q=타로점" target="_blank" class="external-link">타로점 보러가기</a>
-        <p class="privacy-notice">(개인정보는 절대 저장되지 않습니다)</p>
+        <p class="privacy-notice">(입력하신 정보는 절대 저장, 전송되지 않습니다)</p>
         <div class="tabs">
-            <button class="tab-button active" onclick="showTab('tojeong')">신년 사주 분석</button>
-            <button class="tab-button" onclick="showTab('compatibility')">궁합 분석</button>
+            <button class="tab-button active" onclick="showTab('tojeong', this)">신년 사주 분석</button>
+            <button class="tab-button" onclick="showTab('compatibility', this)">궁합 분석</button>
         </div>
 
         <div id="tojeong" class="tab-content active">
@@ -87,10 +102,36 @@
             <p id="result-text"></p>
             <div class="share-section"><button class="share-button" onclick="copyResult()">결과 공유하기</button><p id="copy-message">결과가 복사되었습니다!</p></div>
         </div>
+
+        <div id="about" class="info-section">
+            <h2>About Us</h2>
+            <p>AI 명리학 토정비결은 최첨단 인공지능 기술과 동양의 오랜 지혜, 명리학을 결합하여 사용자에게 깊이 있는 운세 분석을 제공하는 서비스입니다. 저희는 사용자가 자신의 삶을 더 깊이 이해하고, 미래를 긍정적으로 설계하는 데 도움을 드리는 것을 목표로 합니다.</p>
+        </div>
+        <div id="contact" class="info-section">
+            <h2>Contact Us</h2>
+            <p>서비스에 대한 문의나 제휴 제안은 아래 이메일로 연락주시기 바랍니다.<br>Email: <a href="mailto:contact@yourdomain.com">contact@yourdomain.com</a></p>
+        </div>
+        <div id="privacy" class="info-section">
+            <h2>개인정보처리방침</h2>
+            <p><strong>1. 개인정보의 수집 및 이용 목적</strong><br>본 서비스는 사용자가 입력한 생년월일시 정보를 오직 운세 결과 생성 목적으로만 사용합니다. 어떠한 개인정보도 서버에 저장, 기록하거나 제3자에게 전송하지 않습니다.</p>
+            <p><strong>2. 개인정보의 보유 및 이용기간</strong><br>운세 결과는 생성 즉시 사용자에게 보여지며, 페이지를 벗어나는 순간 모든 입력 정보는 파기됩니다. 서비스는 사용자의 어떠한 정보도 보유하지 않습니다.</p>
+            <p><strong>3. 광고에 관한 정보</strong><br>본 사이트는 Google AdSense를 통한 광고를 포함하고 있습니다. Google은 개인화된 광고를 제공하기 위해 쿠키를 사용할 수 있습니다. 사용자는 Google 광고 설정을 통해 개인화 광고를 선택 해제할 수 있습니다. 자세한 내용은 <a href="https://policies.google.com/technologies/ads" target="_blank">Google의 광고 정책</a>을 참조하십시오.</p>
+        </div>
     </div>
 
+    <footer>
+        <div class="footer-links">
+            <a href="#" onclick="showInfo('about'); return false;">About Us</a>
+            <a href="#" onclick="showInfo('contact'); return false;">Contact</a>
+            <a href="#" onclick="showInfo('privacy'); return false;">개인정보처리방침</a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2024 AI 명리학 토정비결. All Rights Reserved.
+        </div>
+    </footer>
+
     <script>
-// --- AI Saju Narrative Engine "Architect" (Final Version) ---
+// --- AI Saju Narrative Engine "Architect" (AdSense Optimized) ---
 const zodiacs = {
     쥐: { emoji: '🐭', lacking: '화(火)', dominant: '수(水)' }, 소: { emoji: '🐮', lacking: '목(木)', dominant: '토(土)' }, 호랑이: { emoji: '🐯', lacking: '금(金)', dominant: '목(木)' }, 토끼: { emoji: '🐰', lacking: '금(金)', dominant: '목(木)' }, 용: { emoji: '🐲', lacking: '수(水)', dominant: '토(土)' }, 뱀: { emoji: '🐍', lacking: '수(水)', dominant: '화(火)' }, 말: { emoji: '🐴', lacking: '수(水)', dominant: '화(火)' }, 양: { emoji: '🐑', lacking: '목(木)', dominant: '토(土)' }, 원숭이: { emoji: '🐵', lacking: '목(木)', dominant: '금(金)' }, 닭: { emoji: '🐔', lacking: '목(木)', dominant: '금(金)' }, 개: { emoji: '🐶', lacking: '수(水)', dominant: '토(土)' }, 돼지: { emoji: '🐷', lacking: '화(火)', dominant: '수(水)' }
 };
@@ -144,7 +185,41 @@ const sajuFortuneData = {
 };
 
 // --- Utility Functions (Final Version) ---
+let currentTab = 'tojeong';
+let currentInfo = null;
+
+function hideAllMainContent() {
+    document.querySelectorAll('.tab-content, .result, .info-section').forEach(el => el.style.display = 'none');
+}
+
+function showTab(tabName, element) {
+    currentTab = tabName;
+    hideAllMainContent();
+    document.getElementById(tabName).style.display = 'block';
+
+    document.querySelectorAll('.tab-button').forEach(t => t.classList.remove('active'));
+    element.classList.add('active');
+    
+    currentInfo = null;
+}
+
+function showInfo(infoName) {
+    hideAllMainContent();
+    const infoEl = document.getElementById(infoName);
+    infoEl.style.display = 'block';
+    currentInfo = infoName;
+    
+    document.querySelectorAll('.tab-button').forEach(t => t.classList.remove('active'));
+}
+
 function showFortune(type) {
+    if(currentInfo) {
+        document.getElementById(currentInfo).style.display = 'none';
+        currentInfo = null;
+        document.querySelector(`.tab-button[onclick*="'${currentTab}'"]`).classList.add('active');
+    }
+    document.getElementById(currentTab).style.display = 'block';
+
     let title = '', fortuneText = '', icon = '', basisHTML = '', valid = true;
     const bookIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v2H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M4 7h16v10H4z"/></svg>`;
     const heartIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
@@ -265,9 +340,15 @@ ${text}`;
 }
 
 function populateSelect(id, start, end, suffix, placeholder) { const select = document.getElementById(id); select.innerHTML = ''; if (placeholder) { const ph_option = document.createElement('option'); ph_option.value = ""; ph_option.textContent = placeholder; ph_option.disabled = true; ph_option.selected = true; select.appendChild(ph_option); } for (let i = start; i <= end; i++) { const option = document.createElement('option'); option.value = i; option.textContent = i + suffix; select.appendChild(option); } }
-const tabs = document.querySelectorAll('.tab-button'), contents = document.querySelectorAll('.tab-content');
-function showTab(tabName) { contents.forEach(c=>c.classList.remove('active')); tabs.forEach(t=>t.classList.remove('active')); document.getElementById(tabName).classList.add('active'); document.querySelector(`button[onclick="showTab('${tabName}')"]`).classList.add('active'); document.getElementById('result').style.display='none'; document.getElementById('result').style.opacity='0'; }
-window.onload = () => { ['', '1', '2'].forEach(suffix => { populateSelect('month' + suffix, 1, 12, '월', '출생월'); populateSelect('day' + suffix, 1, 31, '일', '출생일'); if(suffix === '') populateSelect('hour', 0, 23, '시', '출생시'); }); };
+
+window.onload = () => { 
+    ['', '1', '2'].forEach(suffix => { 
+        populateSelect('month' + suffix, 1, 12, '월', '출생월'); 
+        populateSelect('day' + suffix, 1, 31, '일', '출생일'); 
+        if(suffix === '') populateSelect('hour', 0, 23, '시', '출생시'); 
+    }); 
+    showTab('tojeong', document.querySelector('.tab-button.active'));
+};
     </script>
 </body>
 </html>
