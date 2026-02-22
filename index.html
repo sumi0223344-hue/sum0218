@@ -1,25 +1,273 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <title>Retro Shooter</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 명리학 프리미엄 토정비결</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap');
+
+        :root {
+            --bg-color: #1a1a2e;
+            --primary-color: #162447;
+            --accent-color: #f7d794;
+            --accent-hover: #e6c584;
+            --text-color: #e0e0e0;
+            --text-muted: #b0b0c0;
+            --border-color: #4a4a6a;
+            --input-bg: #1f2a52;
+            --basis-bg: rgba(0,0,0,0.2);
+        }
+
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Noto Serif KR', serif; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; margin: 0; padding: 40px 20px; box-sizing: border-box; }
+        .container { background-color: var(--primary-color); padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); width: 100%; max-width: 700px; text-align: center; border: 1px solid #c0c090; transition: all 0.3s ease; }
+        h1 { color: var(--accent-color); font-size: 2.5em; margin-bottom: 5px; font-weight: 700; letter-spacing: 2px; }
+        .external-link { display: block; margin-top: -5px; margin-bottom: 15px; color: var(--accent-hover); text-decoration: none; font-size: 1em; transition: color 0.3s; }
+        .external-link:hover { color: var(--accent-color); text-decoration: underline; }
+        .privacy-notice { font-size: 0.9em; color: var(--text-muted); margin-top: 0; margin-bottom: 20px; font-weight: 400; }
+        .tabs { display: flex; justify-content: center; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); }
+        .tab-button { background: none; border: none; color: var(--text-muted); padding: 15px 25px; font-size: 1.1em; cursor: pointer; font-family: 'Noto Serif KR', serif; transition: color 0.3s, border-bottom 0.3s; border-bottom: 3px solid transparent; margin-bottom: -1px; }
+        .tab-button.active { color: var(--accent-color); border-bottom: 3px solid var(--accent-color); font-weight: 600; }
+        .tab-content { display: none; animation: fadeIn 0.8s; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .input-group, .compat-group { margin-bottom: 20px; }
+        .compat-group h3 { color: #c0c090; margin-bottom: 15px; font-size: 1.2em; }
+        .input-fields { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .input-fields select, .input-fields input { padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background-color: var(--input-bg); color: var(--text-color); font-family: 'Noto Serif KR', serif; font-size: 1em; flex-grow: 1; min-width: 80px; transition: border-color 0.3s, box-shadow 0.3s; }
+        .input-fields select:focus, .input-fields input:focus { outline: none; border-color: var(--accent-color); box-shadow: 0 0 10px rgba(247, 215, 148, 0.2); }
+        .input-fields select { -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2212%22%20height%3D%228%22%20viewBox%3D%220%200%2012%208%22%20fill%3D%22none%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22M1.41%200.58L6%205.17L10.59%200.58L12%202L6%208L0%202L1.41%200.58Z%22%20fill%3D%22%23e0e0e0%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 12px center; }
+        .main-button { background-color: var(--accent-color); color: var(--bg-color); border: none; padding: 15px 40px; border-radius: 8px; font-size: 1.2em; cursor: pointer; transition: all 0.3s ease; font-family: 'Noto Serif KR', serif; font-weight: 600; margin-top: 10px; }
+        .main-button:hover { background-color: var(--accent-hover); box-shadow: 0 5px 15px rgba(247, 215, 148, 0.2); transform: translateY(-2px); }
+        .result { margin-top: 40px; text-align: left; display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out; border-top: 1px solid var(--border-color); padding-top: 30px; }
+        .result h2 { color: var(--accent-color); border-bottom: 2px solid var(--accent-color); padding-bottom: 10px; margin-bottom: 20px; display: flex; align-items: center; }
+        .result h2 svg { margin-right: 12px; }
+        .result p { font-size: 1.1em; line-height: 1.9; color: var(--text-color); white-space: pre-wrap; }
+        .result-basis { background-color: var(--basis-bg); border-radius: 8px; padding: 20px; margin-bottom: 25px; border: 1px solid var(--border-color); }
+        .result-basis h3 { color: var(--accent-hover); margin-top: 0; margin-bottom: 10px; font-size: 1.2em; }
+        .result-basis p { font-size: 1em; line-height: 1.7; color: var(--text-muted); margin-bottom: 0; }
+        .share-section { margin-top: 30px; text-align: center; }
+        .share-button { background-color: transparent; color: var(--accent-color); border: 1px solid var(--accent-color); padding: 10px 25px; border-radius: 8px; font-size: 1em; cursor: pointer; transition: all 0.3s ease; font-family: 'Noto Serif KR', serif; }
+        .share-button:hover { background-color: var(--accent-color); color: var(--primary-color); }
+        #copy-message { margin-top: 10px; color: var(--accent-hover); font-size: 0.9em; opacity: 0; transition: opacity 0.4s; }
+    </style>
 </head>
 <body>
-    <video autoplay muted loop id="background-video">
-        <source src="https://cdn.midjourney.com/video/e6e2d28c-e452-4808-afdc-c4f08223d84e/1.mp4" type="video/mp4">
-    </video>
-
-    <div id="game-container">
-        <div id="start-screen">
-            <h1>Retro Shooter</h1>
+    <div class="container">
+        <h1>AI 명리학 토정비결</h1>
+        <a href="https://www.google.com/search?q=타로점" target="_blank" class="external-link">타로점 보러가기</a>
+        <p class="privacy-notice">(개인정보는 절대 저장되지 않습니다)</p>
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('tojeong')">신년 사주 분석</button>
+            <button class="tab-button" onclick="showTab('compatibility')">궁합 분석</button>
         </div>
-        <canvas id="game-canvas" width="800" height="600" style="display: none;"></canvas>
-        <div id="ui-container">
-            <h2>Score: <span id="score">0</span></h2>
-            <button id="start-button">Start Game</button>
+
+        <div id="tojeong" class="tab-content active">
+             <div class="input-group"><div class="input-fields">
+                    <input type="number" id="year" placeholder="출생년도 (4자리)" required>
+                    <select id="month" required></select>
+                    <select id="day" required></select>
+                    <select id="hour" required></select>
+            </div></div>
+            <button class="main-button" onclick="showFortune('tojeong')">AI 신년 사주 분석 보기</button>
+        </div>
+        <div id="compatibility" class="tab-content">
+             <div class="compat-group"><h3>첫 번째 분</h3><div class="input-fields">
+                    <input type="number" id="year1" placeholder="출생년도" required><select id="month1" required></select><select id="day1" required></select>
+            </div></div>
+            <div class="compat-group"><h3>두 번째 분</h3><div class="input-fields">
+                    <input type="number" id="year2" placeholder="출생년도" required><select id="month2" required></select><select id="day2" required></select>
+            </div></div>
+            <button class="main-button" onclick="showFortune('compatibility')">AI 궁합 분석 보기</button>
+        </div>
+        
+        <div id="result" class="result">
+            <div id="result-basis" class="result-basis"></div>
+            <h2 id="result-title"></h2>
+            <p id="result-text"></p>
+            <div class="share-section"><button class="share-button" onclick="copyResult()">결과 공유하기</button><p id="copy-message">결과가 복사되었습니다!</p></div>
         </div>
     </div>
-    <script src="game.js"></script>
+
+    <script>
+// --- AI Saju Narrative Engine "Architect" (Final Version) ---
+const zodiacs = {
+    쥐: { emoji: '🐭', lacking: '화(火)', dominant: '수(水)' }, 소: { emoji: '🐮', lacking: '목(木)', dominant: '토(土)' }, 호랑이: { emoji: '🐯', lacking: '금(金)', dominant: '목(木)' }, 토끼: { emoji: '🐰', lacking: '금(金)', dominant: '목(木)' }, 용: { emoji: '🐲', lacking: '수(水)', dominant: '토(土)' }, 뱀: { emoji: '🐍', lacking: '수(水)', dominant: '화(火)' }, 말: { emoji: '🐴', lacking: '수(水)', dominant: '화(火)' }, 양: { emoji: '🐑', lacking: '목(木)', dominant: '토(土)' }, 원숭이: { emoji: '🐵', lacking: '목(木)', dominant: '금(金)' }, 닭: { emoji: '🐔', lacking: '목(木)', dominant: '금(金)' }, 개: { emoji: '🐶', lacking: '수(水)', dominant: '토(土)' }, 돼지: { emoji: '🐷', lacking: '화(火)', dominant: '수(水)' }
+};
+
+function getZodiac(year) {
+    const zodiacNames = ['원숭이', '닭', '개', '돼지', '쥐', '소', '호랑이', '토끼', '용', '뱀', '말', '양'];
+    return zodiacNames[year % 12];
+}
+
+const sajuFortuneData = {
+    lacks_목: {
+        basis: "당신 사주에 부족한 목(木) 기운은 성장과 시작의 동력입니다. 2026년 병오년의 강력한 화(火) 기운은 당신의 목(木) 기운을 더욱 필요로 하므로(목생화), 에너지가 빠르게 소진될 수 있습니다. 의식적인 휴식과 재충전을 통해 운명의 기관차에 땔감을 계속 공급해야 하는 해입니다.",
+        overall: "당신의 열정과 아이디어를 실현시키기 위해 많은 에너지를 쏟아붓게 되는, 매우 바쁜 한 해가 될 것입니다. 성과도 크지만, 그만큼 심신의 소모도 크다는 것을 명심해야 합니다. 혼자 모든 것을 짊어지려 하지 말고, 주변 사람들과 협력하여 에너지를 효율적으로 사용하는 지혜가 필요합니다. 올해는 당신의 한계를 시험하는 해가 될 것이며, 이 과정을 통해 당신의 그릇이 얼마나 큰지 스스로 확인하게 될 것입니다. 선택과 집중의 지혜를 발휘하여, 가장 중요한 목표 하나에 모든 에너지를 집중하는 전략이 유효합니다. 흩어진 에너지는 연기처럼 사라질 뿐, 결실을 보기 어렵습니다. 당신의 열정이 의미 있는 결과로 이어지도록, 냉철한 계획과 꾸준한 자기 관리가 반드시 병행되어야 합니다. 그렇지 않으면 연말에 남는 것은 공허함과 탈진뿐일 수 있습니다.",
+        work: "새로운 사업을 구상하거나, 창의적인 아이디어를 내는 데는 유리하지만, 이를 실제로 추진하고 유지하는 데 많은 노력이 필요합니다. 과로로 인한 번아웃을 가장 경계해야 합니다. 단기적인 성과에 집착하기보다는, 장기적인 안목으로 페이스를 조절하는 전략이 중요합니다. 당신의 머릿속에는 혁신적인 아이디어들이 샘솟지만, 목(木) 기운의 부족은 이를 현실에 뿌리내리게 할 추진력을 약화시킵니다. 따라서 좋은 동료나 파트너를 만나는 것이 올해 직업운의 핵심입니다. 당신이 아이디어 뱅크의 역할을 한다면, 끈기 있고 현실적인 동료가 그 아이디어를 실행에 옮기는 그림이 가장 이상적입니다. 혼자서 모든 것을 다 하려다가는 시작만 거창하고 마무리는 흐지부지될 가능성이 매우 높으니, 유능한 조력자를 찾아 당신의 비전을 공유하고, 그에게 힘을 실어주는 리더십을 발휘해야 합니다.",
+        wealth: "열정적인 활동이 바로 재물로 연결되지 않는 한 해입니다. 오히려 새로운 일을 시작하거나, 여러 가지 시도를 하는 과정에서 초기 투자 비용이 많이 발생할 수 있습니다. 수입보다 지출이 많아지기 쉬운 구조이므로, 철저한 재무 계획 없이는 재정적인 어려움에 처할 수 있습니다. 특히 ‘한 방’을 노리는 투기성 투자는 당신의 부족한 목(木) 기운을 더욱 고갈시킬 뿐이니 절대적으로 피해야 합니다. 올해의 재물운은 돈을 버는 것보다 ‘새로운 가치를 창출하는 경험’에 투자한다고 생각하는 것이 좋습니다. 당장의 수익보다는 미래의 자산이 될 기술을 배우거나, 당신의 건강과 지식에 투자하는 것이 가장 현명한 재테크입니다. 이러한 무형자산이 결국 미래에 더 큰 재물을 불러오는 튼튼한 뿌리가 되어줄 것입니다.",
+        love: "불꽃처럼 타오르는, 강렬하지만 짧은 만남이 잦아지는 해입니다. 목(木) 기운의 부족은 관계를 꾸준히 유지하고 성장시키는 힘의 부족을 의미하는데, 여기에 강력한 화(火) 기운이 더해지니, 관계가 시작되자마자 너무 뜨겁게 타올라 한순간에 재가 되어버리기 쉽습니다. 만남과 헤어짐이 반복되면서 감정적인 소모가 매우 클 수 있습니다. 솔로라면, 첫눈에 반한 상대에게 모든 것을 걸기보다는, 여러 사람을 만나보며 당신의 에너지를 고갈시키지 않는 편안한 상대를 찾는 지혜가 필요합니다. 연인이 있는 경우, 상대방에게 너무 많은 것을 요구하거나, 자신의 열정만을 강요하다가 관계가 파국으로 치닫지 않도록 주의해야 합니다. 의식적으로 함께 취미를 즐기거나, 차분한 대화를 통해 관계의 ‘땔감’을 꾸준히 공급해주는 노력이 절실합니다.",
+        health: "간과 담에 해당하는 목(木) 기운이 부족한 상태에서, 심장을 상징하는 화(火) 기운이 강하게 들어오니, ‘심화상염(心火上炎)’ 즉, 심장의 불길이 위로 치솟아 당신을 괴롭히기 쉽습니다. 이는 안구 건조, 두통, 불면증, 잦은 구내염 등의 증상으로 나타날 수 있습니다. 또한, 에너지 소모가 큰 해이므로, 만성적인 피로와 번아웃에 시달릴 가능성이 높습니다. 당신에게 필요한 것은 의식적인 ‘쉼’과 ‘재충전’입니다. 주말에는 도시를 벗어나 숲이나 공원을 찾아 땅의 기운과 나무의 기운을 보충하는 것이 좋습니다. 잠자리에 들기 전에는 전자기기를 멀리하고, 차분한 명상을 통해 하루 동안 과열된 심장의 열기를 식혀주는 습관을 들이는 것이 건강을 지키는 핵심입니다."
+    },
+    lacks_화: {
+        basis: "당신 사주에 부족한 화(火) 기운은 열정과 자기표현, 명예를 상징합니다. 2026년 병오년은 하늘(丙)과 땅(午)이 모두 강력한 불(火)로 이루어져, 당신의 사주에 가장 필요한 기운을 직접적으로 강력하게 보충해주니, 꺼져가던 불씨가 거대한 횃불로 타오르는 최고의 해입니다.",
+        overall: "당신의 인생에서 가장 빛나는 순간이 될 수 있는 역동적인 해입니다. 위축되었던 과거를 뒤로하고, 무대의 주인공이 되어 당신의 재능과 매력을 마음껏 발산하세요. 주변의 이목이 집중되고 인기가 급상승하니, 이를 긍정적인 기회로 삼아 당신의 영향력을 넓혀야 합니다. 오랫동안 어둠 속에 있던 당신에게 갑자기 밝은 조명이 비추는 것과 같으니, 처음에는 다소 어색하고 부담스러울 수 있습니다. 하지만 이 기운을 피하지 말고 온전히 즐기십시오. 당신의 말 한마디, 행동 하나하나가 이전보다 훨씬 큰 파급력을 가지게 됩니다. 이 강력한 영향력을 사적인 이익보다는 공적인 선을 위해 사용할 때, 당신의 명예는 더욱 높아지고 운의 격(格)이 한 단계 상승하는 놀라운 경험을 하게 될 것입니다. 잊지 마십시오. 2026년의 주인공은 바로 당신입니다.",
+        work: "승진, 합격, 당선 등 명예를 얻는 데 최고의 운이 따릅니다. 발표, 프레젠테이션, 영업 등 자신을 드러내는 분야에서 특별한 성과를 거둘 수 있습니다. 당신의 말 한마디가 사람들의 마음을 움직이는 힘을 가지니, 자신감을 가지고 대중 앞에 서기를 두려워하지 마세요. 그동안 당신의 성과를 가로채거나, 당신을 인정하지 않았던 사람들조차 당신의 능력을 인정할 수밖에 없는 명백한 결과물을 만들어 낼 것입니다. 특히 문화, 예술, 방송, 교육 등 사람들에게 영감을 주고 자신을 표현하는 분야에 종사하고 있다면, 당신의 커리어에 정점을 찍을 수 있는 절호의 기회입니다. 다만, 높아진 위상만큼 당신을 시기하고 질투하는 세력도 함께 나타날 수 있으니, 항상 겸손한 자세를 잃지 않고, 당신의 성공을 주변과 함께 나누는 아량을 보여주는 것이 중요합니다.",
+        wealth: "명예가 높아짐에 따라 재물이 자연스럽게 따라 들어오는 ‘명예재록(名譽財祿)’의 운세입니다. 당신의 이름값, 즉 브랜드 가치가 상승하면서, 이전과는 비교할 수 없는 수준의 재물을 만질 기회가 찾아옵니다. 연봉 협상에서 유리한 고지를 점령하거나, 당신의 재능을 높이 산 곳에서 스카우트 제의가 들어올 수 있습니다. 하지만, 이는 당신이 직접 발로 뛰어 버는 돈이라기보다는, 당신의 명성을 보고 따라오는 돈이라는 점을 명심해야 합니다. 따라서 갑자기 들어온 돈을 유흥이나 사치에 탕진하지 않도록 각별히 주의해야 합니다. 당신의 높아진 격에 어울리는 안전 자산에 투자하거나, 당신의 가치를 더욱 높여줄 수 있는 자기계발에 재투자하는 것이 부를 유지하고 늘리는 핵심 비결입니다.",
+        love: "당신의 매력이 폭발하여, 가만히 있어도 주변의 이성과 대중의 시선을 한 몸에 받는, 그야말로 ‘도화(桃花)’가 만개하는 해입니다. 그동안 짝사랑만 해왔거나, 연애에 자신감이 없었다면, 올해는 당신의 인생에서 가장 로맨틱한 순간을 경험하게 될 것입니다. 당신의 작은 미소, 사소한 몸짓 하나에도 상대방은 큰 의미를 부여하고 매력을 느끼게 됩니다. 솔로라면, 여러 사람의 대시를 받으며 행복한 고민에 빠질 수 있습니다. 다만, 너무 많은 선택지 앞에서 길을 잃지 않도록, 당신의 마음이 진정으로 향하는 곳이 어디인지 스스로에게 질문하는 시간을 가져야 합니다. 연인이 있는 경우, 당신의 인기가 연인에게는 불안감과 질투의 원인이 될 수 있습니다. 의식적으로 연인에게 더 많은 애정을 표현하고, 당신에게 가장 소중한 사람은 오직 연인뿐이라는 믿음을 심어주는 노력이 필요합니다.",
+        health: "꺼져있던 엔진이 재가동되며, 삶의 전반에 활력이 넘치게 됩니다. 정신적인 우울감이나 무기력증으로 고생했다면, 언제 그랬냐는 듯 긍정적인 에너지가 샘솟는 것을 느끼게 될 것입니다. 다만, 갑작스럽게 강해진 화(火) 기운은 심장과 혈관에 부담을 줄 수 있습니다. 평소 심혈관계가 약했거나, 혈압이 높은 편이었다면 각별한 주의가 필요합니다. 또한, 너무 들뜬 마음에 밤늦게까지 활동하거나, 불규칙한 생활을 하기 쉬우니, 의식적으로 차분한 상태를 유지하고 충분한 수면을 취하려는 노력이 필요합니다. 가벼운 운동은 좋으나, 지나치게 땀을 흘리는 격렬한 운동은 오히려 화(火) 기운을 더욱 부추길 수 있으니, 요가나 명상, 가벼운 산책 등이 당신의 건강에 더욱 이롭습니다."
+    },
+    lacks_토: {
+        basis: "당신 사주에 부족한 토(土) 기운은 안정, 신용, 그리고 결실을 상징합니다. 2026년 병오년의 강력한 화(火) 기운은 모든 것을 태워 재를 만들고 땅을 비옥하게 하듯(화생토), 당신의 열정적인 노력이 흩어지지 않고 실질적인 결과물과 안정적인 기반으로 이어지도록 돕는 중요한 해입니다.",
+        overall: "정신없이 바쁘고 열정적인 활동 속에서 실질적인 결실을 맺고, 내실을 다지는 의미 있는 한 해가 될 것입니다. 그동안의 노력이 공허한 외침으로 그치지 않고, 사람들의 인정과 신뢰, 그리고 안정적인 재물이라는 결과로 돌아옵니다. 활동과 휴식의 균형을 맞추는 것이 중요합니다. 이 해는 마치 뜨거운 용광로에서 쇠를 제련하여 단단한 검을 만드는 과정과 같습니다. 당신이 쏟아부은 열정과 노력(火)이, 비로소 당신의 인생을 지탱해 줄 단단한 기반(土)이 되는 것입니다. 따라서 바쁘고 힘든 과정 속에서도 불평하기보다는, 나의 성(城)을 쌓고 있다는 긍정적인 마음을 가지는 것이 중요합니다. 연말이 되면, 당신이 쌓아 올린 견고한 성 위에서 이전과는 비교할 수 없는 안정감과 자신감을 느끼고 있는 스스로를 발견하게 될 것입니다.",
+        work: "당신의 열정적인 활동이 사람들에게 깊은 신뢰감을 심어주는 해입니다. 이전까지 당신을 ‘반짝이는 아이디어는 많지만, 끈기가 부족한 사람’으로 평가했다면, 올해는 당신의 성실함과 책임감에 주변 사람들이 감탄하게 될 것입니다. 특히 여러 부서나 사람들과 협력하여 결과물을 만들어내는 대규모 프로젝트에서 당신의 중재자, 관리자로서의 능력이 빛을 발합니다. 뜨겁게 달아오른 사람들을 진정시키고, 흩어진 의견을 하나로 모아 현실적인 대안을 제시하는 당신의 모습에, 자연스럽게 리더의 자격이 주어질 것입니다. 이직이나 창업보다는, 현재 몸담고 있는 조직 내에서 당신의 입지를 굳건히 다지는 것이 훨씬 유리한 시기입니다. 당신은 조직에 없어서는 안 될 핵심 인재로 자리매김하게 될 것입니다.",
+        wealth: "열심히 일한 만큼 재물이 따르는 정직한 운세입니다. 당신의 열정과 노력이 사람들에게 신뢰를 주어, 이것이 곧 재물로 연결됩니다. 다만, 뜨거운 열기에 취해 충동적인 소비를 할 수 있으니, 벌어들인 재물을 안정적인 자산으로 변환하는 과정이 반드시 필요합니다. 당신에게 부족한 토(土)는 재물을 담는 그릇을 의미합니다. 그릇이 약한 당신에게 2026년의 화생토(火生土) 기운은, 그릇을 단단하게 만들어주는 절호의 기회입니다. 따라서 올해는 단순히 돈을 버는 것에 그치지 않고, ‘부를 관리하는 시스템’을 만드는 데 집중해야 합니다. 예를 들어, 생애 첫 부동산을 마련하거나, 장기적인 관점의 적립식 펀드에 가입하는 등, 당신의 돈이 안정적으로 머물 수 있는 ‘집’을 마련해주는 것이 중요합니다. 이것이 미래의 더 큰 부를 담을 수 있는 그릇을 만드는 핵심 비결입니다.",
+        love: "당신의 애정운에 ‘안정’과 ‘신뢰’라는 두 기둥이 세워지는 해입니다. 부족했던 토(土) 기운은 관계의 안정성을 의미하는데, 2026년의 강한 화(火) 기운이 당신의 열정적인 사랑(火)을 현실적인 결실(土)로 이어주는 강력한 조력자 역할을 합니다. 즉, 불같은 사랑이 결실을 맺어 결혼이나 동거 등 안정적인 관계로 발전하기에 더없이 좋은 시기입니다. 솔로라면, 화려하고 자극적인 상대보다는, 당신에게 편안함과 안정감을 주는, 믿음직한 사람에게 마음이 끌리게 됩니다. 연인이 있다면, 두 사람의 관계는 한 단계 더 깊어지고, 함께 미래를 구체적으로 계획하는 중요한 대화를 나누게 될 것입니다. 사소한 다툼이나 오해보다는, 서로에 대한 깊은 신뢰를 바탕으로 관계의 견고한 성을 함께 쌓아 올리는, 매우 의미 있는 한 해가 될 것입니다.",
+        health: "전반적으로 건강하지만, 소화기 계통의 부담이 가중될 수 있는 한 해입니다. 토(土)는 위장과 비장을 상징하는데, 화(火) 기운이 지나치면 땅이 메마르듯, 위장에 열이 쌓여 위염, 식도염, 변비 등으로 고생할 수 있습니다. 바쁘다는 핑계로 끼니를 거르거나, 맵고 짠 자극적인 음식으로 스트레스를 푸는 습관은 절대적으로 피해야 합니다. 규칙적인 시간에, 위에 부담이 적은 음식을 천천히 씹어 먹는 습관을 들이는 것이 중요합니다. 또한, 토(土) 기운은 우리 몸의 중심을 잡아주는 역할을 하므로, 코어 근육을 강화하는 운동(플랭크, 필라테스 등)이 당신의 건강을 지켜주는 튼튼한 기둥이 되어 줄 것입니다."
+    },
+    lacks_금: {
+        basis: "당신 사주에 부족한 금(金) 기운은 결단력, 원칙, 그리고 마무리를 상징합니다. 2026년 병오년의 거센 불길(火)은 당신의 약한 금(金) 기운을 녹이려 하니(화극금), 감정적인 판단에 휩쓸려 원칙을 잃거나, 시작만 하고 마무리를 짓지 못하기 쉬운 위태로운 해입니다.",
+        overall: "뜨거운 열정과 주변의 분위기에 휩쓸려 중요한 것을 놓치지 않도록, 의식적으로 냉철함과 이성을 유지해야 하는 해입니다. 당신의 원칙과 소신을 지키는 것이 올해의 가장 큰 과제입니다. 모든 제안을 긍정적으로 보기보다는, 비판적인 시각으로 옥석을 가려내는 지혜가 필요합니다. 주변에서는 ‘왜 그렇게 깐깐하게 구느냐’, ‘좋은 게 좋은 것 아니냐’라며 당신을 비난할 수도 있습니다. 하지만 거센 불길 속에서 당신의 소중한 것을 지키기 위해서는, 단단한 방화벽(防火壁)과 같은 냉철한 원칙이 반드시 필요합니다. 감정에 휩쓸린 잘못된 결정 하나가, 그동안 쌓아온 모든 것을 한 순간에 재로 만들어 버릴 수 있다는 것을 명심해야 합니다. 고독한 싸움이 되겠지만, 이 시기를 잘 이겨낸다면 당신은 이전과 비교할 수 없는 강인한 정신력과 통찰력을 지닌 존재로 거듭날 것입니다.",
+        work: "당신의 원칙과 소신이 계속해서 도전을 받는 한 해가 될 것입니다. 비효율적인 관행을 따르라는 압박을 받거나, 결과만을 위해 과정을 무시하라는 유혹에 빠지기 쉽습니다. 특히 상사나 동료와의 감정적인 대립으로 인해 업무의 본질이 흐려질 수 있습니다. 이럴 때일수록 사적인 감정을 배제하고, 데이터와 규정, 계약서 등 객관적인 사실에 근거하여 업무를 처리하는 자세가 필요합니다. 당신은 조직의 ‘감시자’ 또는 ‘품질 관리자’가 되어야 합니다. 모두가 열에 취해 달려갈 때, 홀로 냉철하게 브레이크를 걸어주는 당신의 역할이 결국 조직 전체를 더 큰 위험에서 구해내는 결정적인 역할을 하게 될 것입니다. 단기적으로는 미움을 받을 수 있으나, 장기적으로는 당신의 그 예리한 판단력에 모두가 감사하게 될 것입니다.",
+        wealth: "재물운에 있어 ‘유혹’과 ‘함정’이 도사리고 있는 매우 위험한 시기입니다. 2026년의 불(火) 기운은 당신의 부족한 판단력(金)을 흐리게 하여, ‘대박’이라는 허상을 좇게 만듭니다. 주변에서 들려오는 달콤한 투자 제안이나, 단기간에 고수익을 보장한다는 말은 100% 사기라고 생각해도 무방합니다. 올해는 돈을 버는 것보다 ‘지키는 것’이 수십 배 더 중요합니다. 모든 계약서는 변호사의 자문을 구하듯 꼼꼼히 살펴야 하며, 큰돈이 오가는 거래는 가급적 피하는 것이 좋습니다. 당신의 재산을 지키는 가장 좋은 방법은, 가장 보수적이고 안전한 자산(예: 국채, 은행 예금)에 묶어두고, 2026년의 뜨거운 열기가 지나가기를 기다리는 것입니다. 불길 속으로 뛰어들어 무언가를 얻으려 하지 마십시오. 당신의 모든 것이 녹아내릴 수 있습니다.",
+        love: "당신의 애정 관계에 ‘오해’와 ‘다툼’이라는 먹구름이 끼기 쉬운 해입니다. 금(金) 기운의 부족은 명확하고 깔끔한 의사소통의 어려움을 의미하는데, 여기에 감정을 부추기는 화(火) 기운이 더해지니, 당신의 의도가 왜곡되어 전달되거나, 상대방의 말을 감정적으로 받아들여 사소한 문제가 큰 싸움으로 번지기 쉽습니다. 특히 ‘홧김에’ 이별을 통보하는 등, 돌이킬 수 없는 결정을 내리지 않도록 각별히 주의해야 합니다. 솔로라면, 상대방의 화려한 겉모습이나 달콤한 말에 쉽게 현혹될 수 있습니다. 그 사람의 진심을 알기 전까지는 마음을 쉽게 열지 말고, 시간을 가지고 천천히 지켜보는 신중함이 필요합니다. 올해의 애정운 키워드는 ‘인내’와 ‘경청’입니다. 하고 싶은 말이 목 끝까지 차올라도 세 번 참고, 상대방의 말을 끝까지 들어주는 노력이 위태로운 관계를 구해낼 유일한 동아줄입니다.",
+        health: "강력한 화(火) 기운이 폐와 대장을 상징하는 금(金) 기운을 직접적으로 공격하니, 호흡기 계통의 질환에 가장 취약해지는 시기입니다. 평소 기관지가 약했다면, 마른기침이나 천식, 심하면 폐렴 등으로 고생할 수 있습니다. 건조한 환경을 피하고, 가습기를 사용하며, 미세먼지가 심한 날에는 외출을 삼가는 등 각별한 관리가 필요합니다. 또한, 금(金)은 뼈를 상징하기도 하므로, 작은 충격에도 골절이나 부상을 당하기 쉽습니다. 격렬한 운동이나 위험한 레저 활동은 피하는 것이 좋습니다. 흰색 계열의 옷이나 액세서리, 서쪽 방향으로의 여행이 당신의 부족한 금(金) 기운을 보충해주는 데 도움이 될 수 있습니다."
+    },
+    lacks_수: {
+        basis: "당신 사주에 부족한 수(水) 기운은 지혜, 냉철함, 그리고 생명력을 상징합니다. 2026년 병오년의 거대한 불(火)의 기운은 당신의 부족한 수(水) 기운을 증발시키려 하니(수극화), 물과 불의 극심한 대립 속에서 균형을 잃고 감정적으로 폭주하거나 쉽게 지치기 쉬운 해입니다.",
+        overall: "감정의 기복이 매우 심해지고, 이성적인 판단력이 흐려지기 쉬운 시기입니다. 중요한 결정을 내릴 때는 반드시 여러 사람의 조언을 구하고, 혼자서 성급하게 판단하지 않도록 주의해야 합니다. 뜨거운 열기를 식혀줄 수 있는 의식적인 휴식과 명상이 절실히 필요합니다. 당신의 마음은 마치 가뭄으로 바닥을 드러낸 저수지와 같습니다. 작은 불씨 하나에도 모든 것이 타버릴 듯 위태로운 상태입니다. 이럴 때일수록 조급해하면 안 됩니다. 억지로 무언가를 채우려 하기보다는, 지금의 결핍을 인정하고, 비워진 공간을 통해 자신을 성찰하는 기회로 삼는 지혜가 필요합니다. 물(水)은 지혜를 상징합니다. 물이 부족하니, 외부에서 지혜를 빌려와야 합니다. 책을 읽고, 현명한 스승을 찾아가 조언을 구하며, 당신의 뜨거운 머리를 식혀줄 지혜의 단비를 끊임없이 내려야 합니다.",
+        work: "끓어오르는 감정을 주체하지 못해, 동료나 상사에게 돌이킬 수 없는 말을 내뱉기 쉬운 위험한 시기입니다. ‘욱’하는 마음에 사직서를 던지거나, 공들여온 프로젝트를 포기하는 등 충동적인 행동으로 그동안의 노력을 물거품으로 만들 수 있습니다. 모든 문제의 원인은 외부에 있는 것이 아니라, 당신의 ‘조급함’과 ‘감정’에 있다는 것을 명심해야 합니다. 중요한 회의나 협상 전에는 심호흡을 통해 마음을 가라앉히고, 감정적인 발언보다는 객관적인 데이터에 근거하여 말하는 습관을 들여야 합니다. 또한, 올해는 당신의 부족한 수(水) 기운, 즉 유연성과 적응력을 길러야 하는 해입니다. 당신의 계획만이 옳다고 주장하기보다는, 물처럼 유연하게 상황에 대처하고, 다른 사람의 의견을 경청하는 자세가 당신을 더 큰 실패에서 구해줄 것입니다.",
+        wealth: "재물운 역시 감정의 파도에 따라 극심한 롤러코스터를 타게 됩니다. 시장이 조금만 올라도 ‘지금이 아니면 안 된다’는 초조함에 추격 매수를 하고, 조금만 내려도 공포에 질려 투매를 하기 쉽습니다. 이러한 감정적인 매매는 당신의 소중한 자산을 증발시키는 가장 빠른 길입니다. 2026년에는 주식 시장 앱을 삭제하거나, HTS를 멀리하는 것이 오히려 돈을 버는 길일 수 있습니다. 투자를 해야 한다면, 당신의 감정이 개입될 여지가 없는, 전문가가 운용하는 상품에 맡기거나, 아무런 판단이 필요 없는 적립식 상품에 기계적으로 투자하는 것이 가장 안전합니다. 수(水) 기운의 부족은 재물의 흐름을 만드는 능력이 약하다는 의미이기도 하므로, 돈을 좇기보다는, 당신의 본업에 충실하여 안정적인 현금 흐름을 확보하는 것이 최우선 과제입니다.",
+        love: "사랑이 아닌 ‘집착’에 빠지기 쉬운 매우 위험한 해입니다. 당신에게 부족한 수(水) 기운은 관계의 유연성과 상대방을 받아들이는 포용력을 의미하는데, 이 기운이 메마른 상태에서 강한 불(火)이 타오르니, 상대방을 향한 순수한 애정이 ‘내 것을 빼앗기지 않겠다’는 비뚤어진 소유욕과 집착으로 변질되기 쉽습니다. 상대방의 일거수일투족을 감시하려 들거나, 과거의 사소한 잘못을 끊임없이 들추어내며 상대를 괴롭힐 수 있습니다. 이는 사랑이 아니라, 관계를 파괴하는 독(毒)임을 명심해야 합니다. 솔로라면, 상대방에게 너무 빠르게 빠져들어 혼자만의 상상 속에서 관계를 키워나가다, 현실과의 괴리감에 큰 상처를 받을 수 있습니다. 2026년의 사랑은 ‘거리 두기’가 핵심입니다. 한 걸음 물러나서 상대를 객관적으로 바라보고, 상대에게도 당신으로부터 벗어날 수 있는 자유로운 공간을 허락해야만, 비로소 건강한 관계가 시작될 수 있습니다.",
+        health: "몸의 수분(水)이 거대한 불(火)에 의해 증발해버리는 형상이니, 건강에 적신호가 켜지는 매우 위험한 해입니다. 신장, 방광, 자궁 등 생식기 계통의 질병에 가장 취약하며, 몸의 진액이 말라 피부 건조, 안구 건조, 만성 탈수 등으로 고생할 수 있습니다. 하루에 2리터 이상의 물을 의식적으로 마시는 습관이 무엇보다 중요합니다. 또한, 몸의 열기를 식혀주는 음식이 당신에게 보약이 됩니다. 오이, 수박, 멜론 등 수분이 많은 과일이나, 메밀, 팥과 같은 서늘한 성질의 곡물을 자주 섭취하는 것이 좋습니다. 사우나나 찜질방, 격렬한 운동은 당신의 수(水) 기운을 더욱 고갈시키니 피해야 하며, 차분한 명상이나 수영이 과열된 심신을 안정시키는 데 큰 도움이 될 것입니다."
+    }
+};
+
+// --- Utility Functions (Final Version) ---
+function showFortune(type) {
+    let title = '', fortuneText = '', icon = '', basisHTML = '', valid = true;
+    const bookIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20v2H6.5A2.5 2.5 0 0 1 4 19.5z"/><path d="M4 7h16v10H4z"/></svg>`;
+    const heartIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`;
+            
+    if (type === 'tojeong') {
+        const year = document.getElementById('year').value, month = document.getElementById('month').value, day = document.getElementById('day').value, hour = document.getElementById('hour').value;
+        if (!year || !month || !day || !hour || parseInt(year) < 1920) { alert('생년월일시를 모두 정확히 입력해주세요.'); valid = false; } 
+        else {
+            const zodiacName = getZodiac(year);
+            const zodiacInfo = zodiacs[zodiacName];
+            const dataKey = 'lacks_' + zodiacInfo.lacking.charAt(0);
+            const data = sajuFortuneData[dataKey];
+
+            title = `AI 명리학 2026년 신년 사주 분석`;
+            fortuneText = `[총운]
+${data.overall}
+
+[직업운]
+${data.work}
+
+[재물운]
+${data.wealth}
+
+[애정운]
+${data.love}
+
+[건강운]
+${data.health}`;
+
+            icon = bookIcon;
+            basisHTML = `<h3>AI 사주 원국(原局) 분석</h3>
+                         <p>AI가 당신의 출생년도를 분석한 결과, 당신은 <strong>${zodiacInfo.emoji} ${zodiacName}띠</strong>이며, 당신의 사주에는 본질적으로 <strong>${zodiacInfo.dominant} 기운이 강하고, ${zodiacInfo.lacking} 기운이 부족한 경향</strong>이 있습니다.</p>
+                         <h3>2026년 운세 상호작용 분석</h3>
+                         <p>${data.basis}</p>`;
+        }
+    } else if (type === 'compatibility') {
+        const year1 = document.getElementById('year1').value, year2 = document.getElementById('year2').value;
+        if (!year1 || !year2 || parseInt(year1) < 1920 || parseInt(year2) < 1920) { alert('두 분의 출생년도를 정확히 입력해주세요.'); valid = false;} 
+        else {
+            const zodiac1 = getZodiac(year1), zodiac2 = getZodiac(year2);
+            const dominant1 = zodiacs[zodiac1].dominant, dominant2 = zodiacs[zodiac2].dominant;
+
+            title = `${zodiacs[zodiac1].emoji}${zodiac1}띠와 ${zodiacs[zodiac2].emoji}${zodiac2}띠 궁합 분석`;
+            icon = heartIcon;
+            basisHTML = `<h3>AI 오행 궁합 분석</h3><p>한 분은 <strong>${dominant1}</strong> 기운이, 다른 한 분은 <strong>${dominant2}</strong> 기운이 강하게 나타납니다. AI가 두 분의 핵심 기운의 상호작용을 분석한 결과, 서로에게 부족한 점을 채워주는 이상적인 관계가 될 수 있습니다. 함께할 때 더 큰 시너지를 발휘할 것입니다.</p>`;
+            fortuneText = `[궁합 총평]
+두 분은 서로 다른 매력으로 강하게 이끌리지만, 때로는 그 다름이 갈등의 원인이 될 수도 있습니다. 하지만 서로의 차이를 존중하고 이해하려는 노력을 멈추지 않는다면, 세상에서 가장 특별하고 강력한 유대감을 형성할 수 있는 잠재력을 지닌 커플입니다.
+
+[관계 조언]
+한 분이 새로운 아이디어를 제시하고 방향을 이끈다면, 다른 한 분은 그것을 현실적인 계획으로 만들고 안정적으로 실행하는 역할을 맡을 때 최고의 시너지를 낼 수 있습니다. 서로의 장점을 믿고 각자의 역할을 존중하는 것이 관계 발전의 핵심입니다.`;
+        }
+    }
+    
+    if (!valid) return;
+
+    document.getElementById('result-basis').innerHTML = basisHTML;
+    document.getElementById('result-title').innerHTML = icon + title;
+    document.getElementById('result-text').textContent = fortuneText;
+    const resultDiv = document.getElementById('result');
+    if (resultDiv.style.display !== 'block' || resultDiv.style.opacity === '0') {
+        resultDiv.style.display = 'block';
+        setTimeout(() => { resultDiv.style.opacity = '1'; resultDiv.style.transform = 'translateY(0)'; }, 10);
+    }
+}
+
+function copyResult() {
+    const basis = document.getElementById('result-basis').innerText;
+    const title = document.getElementById('result-title').textContent;
+    const text = document.getElementById('result-text').textContent;
+    const fullText = `[AI 명리학 토정비결]
+
+${basis}
+
+${title}
+
+${text}`;
+
+    const showSuccessMessage = () => {
+        const msg = document.getElementById('copy-message');
+        msg.style.opacity = '1';
+        setTimeout(() => { msg.style.opacity = '0'; }, 2000);
+    };
+    
+    const fallbackCopy = () => {
+        const textArea = document.createElement("textarea");
+        textArea.value = fullText;
+        textArea.style.position = "fixed"; 
+        textArea.style.top = 0;
+        textArea.style.left = 0;
+        textArea.style.width = '2em';
+        textArea.style.height = '2em';
+        textArea.style.padding = 0;
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+        textArea.style.background = 'transparent';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showSuccessMessage();
+            } else {
+                 alert("클립보드 복사에 실패했습니다. 수동으로 복사해주세요.");
+            }
+        } catch (err) {
+            alert("클립보드 복사에 실패했습니다. 수동으로 복사해주세요.");
+        }
+        document.body.removeChild(textArea);
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(fullText).then(showSuccessMessage).catch(fallbackCopy);
+    } else {
+        fallbackCopy();
+    }
+}
+
+function populateSelect(id, start, end, suffix, placeholder) { const select = document.getElementById(id); select.innerHTML = ''; if (placeholder) { const ph_option = document.createElement('option'); ph_option.value = ""; ph_option.textContent = placeholder; ph_option.disabled = true; ph_option.selected = true; select.appendChild(ph_option); } for (let i = start; i <= end; i++) { const option = document.createElement('option'); option.value = i; option.textContent = i + suffix; select.appendChild(option); } }
+const tabs = document.querySelectorAll('.tab-button'), contents = document.querySelectorAll('.tab-content');
+function showTab(tabName) { contents.forEach(c=>c.classList.remove('active')); tabs.forEach(t=>t.classList.remove('active')); document.getElementById(tabName).classList.add('active'); document.querySelector(`button[onclick="showTab('${tabName}')"]`).classList.add('active'); document.getElementById('result').style.display='none'; document.getElementById('result').style.opacity='0'; }
+window.onload = () => { ['', '1', '2'].forEach(suffix => { populateSelect('month' + suffix, 1, 12, '월', '출생월'); populateSelect('day' + suffix, 1, 31, '일', '출생일'); if(suffix === '') populateSelect('hour', 0, 23, '시', '출생시'); }); };
+    </script>
 </body>
 </html>
